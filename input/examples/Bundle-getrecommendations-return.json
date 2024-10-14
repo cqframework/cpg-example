@@ -1,0 +1,234 @@
+{
+  "resourceType": "Bundle",
+  "id": "getrecommendations-return",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "RequestGroup",
+        "id": "getrecommendations-return",
+        "status": "active",
+        "intent": "proposal",
+        "subject": {
+          "reference": "Patient/X"
+        },
+        "action": [
+          {
+            "textEquivalent": "Potential medications",
+            "action": [
+              {
+                "textEquivalent": "Nitrofurantoin (9/10), 2x 100mg x 5 days",
+                "resource": {
+                  "reference": "MedicationRequest/nitrofurantoin"
+                }
+              },
+              {
+                "textEquivalent": "Fosfomycin (7/10), single 3g dose",
+                "resource": {
+                  "reference": "MedicationRequest/fosfomycin"
+                }
+              },
+              {
+                "textEquivalent": "Ciprofloxacin (5/10), 250mg twice daily for 3 days",
+                "resource": {
+                  "reference": "MedicationRequest/ciprofloxacin"
+                }
+              }
+            ]
+          },
+          {
+            "textEquivalent": "Potential procedures",
+            "action": [
+              {
+                "textEquivalent": "CT Pulmonary Angiography (9/10)",
+                "resource": {
+                  "reference": "ServiceRequest/ct-pulmonary-angiography"
+                }
+              },
+              {
+                "textEquivalent": "Ventilation-Perfusion (V/Q) Scan (7/10)",
+                "resource": {
+                  "reference": "ServiceRequest/ventilation-perfusion-scan"
+                }
+              },
+              {
+                "textEquivalent": "MRI with Gd contrast (5/10)",
+                "resource": {
+                  "reference": "ServiceRequest/mri-with-gd-contrast"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "nitrofurantoin",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-medicationrequest"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-rating",
+            "valueRatio": {
+              "numerator": {
+                "value": 9
+              },
+              "denominator": {
+                "value": 10
+              }
+            }
+          }
+        ],
+        "status": "active",
+        "intent": "proposal",
+        "medicationCodeableConcept": {
+          "text": "Nitrofurantoin 2x 100mg x 5 days"
+        },
+        "subject": {
+          "reference": "Patient/X"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "fosfomycin",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-medicationrequest"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-rating",
+            "valueRatio": {
+              "numerator": {
+                "value": 7
+              },
+              "denominator": {
+                "value": 10
+              }
+            }
+          }
+        ],
+        "status": "active",
+        "intent": "proposal",
+        "medicationCodeableConcept": {
+          "text": "Fosfomycin, single 3g dose"
+        },
+        "subject": {
+          "reference": "Patient/X"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "ciprofloxacin",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-medicationrequest"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-rating",
+            "valueRatio": {
+              "numerator": {
+                "value": 5
+              },
+              "denominator": {
+                "value": 10
+              }
+            }
+          }
+        ],
+        "status": "active",
+        "intent": "proposal",
+        "medicationCodeableConcept": {
+          "text": "Ciprofloxacin (250mg twice daily for 3 days)"
+        },
+        "subject": {
+          "reference": "Patient/X"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "ct-pulmonary-angiography",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-rating",
+            "valueRatio": {
+              "numerator": {
+                "value": 9
+              },
+              "denominator": {
+                "value": 10
+              }
+            }
+          }
+        ],
+        "status": "active",
+        "intent": "proposal",
+        "code": {
+          "text": "CT Pulmonary Angiography"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "ventilation-perfusion-scan",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-rating",
+            "valueRatio": {
+              "numerator": {
+                "value": 7
+              },
+              "denominator": {
+                "value": 10
+              }
+            }
+          }
+        ],
+        "status": "active",
+        "intent": "proposal",
+        "code": {
+          "text": "Ventilation-Perfusion (V/Q) Scan"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "mri-with-gd-contrast",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-rating",
+            "valueRatio": {
+              "numerator": {
+                "value": 5
+              },
+              "denominator": {
+                "value": 10
+              }
+            }
+          }
+        ],
+        "status": "active",
+        "intent": "proposal",
+        "code": {
+          "text": "MRI with Gd Contrast"
+        }
+      }
+    }
+  ]
+}

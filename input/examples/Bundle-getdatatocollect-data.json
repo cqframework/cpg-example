@@ -1,0 +1,121 @@
+{
+  "resourceType": "Bundle",
+  "id": "getdatatocollect-data",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "Y",
+        "active": true,
+        "gender": "female",
+        "birthDate": "1989-03-12",
+        "deceasedBoolean": false
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "lower-abdominal-pain",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ],
+          "text": "Active"
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed",
+              "display": "Confirmed"
+            }
+          ],
+          "text": "Confirmed"
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "encounter-diagnosis",
+                "display": "Encounter Diagnosis"
+              }
+            ],
+            "text": "Encounter Diagnosis"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "XXXXXX",
+              "display": "Lower abdominal pain"
+            }
+          ],
+          "text": "Lower abdominal pain"
+        },
+        "subject": {
+          "reference": "Patient/Y"
+        },
+        "onsetDateTime": "2024-10-13"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "Frequent urination with burning sensation",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ],
+          "text": "Active"
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed",
+              "display": "Confirmed"
+            }
+          ],
+          "text": "Confirmed"
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "encounter-diagnosis",
+                "display": "Encounter Diagnosis"
+              }
+            ],
+            "text": "Encounter Diagnosis"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "XXXXXX",
+              "display": "Frequent urination with burning sensation"
+            }
+          ],
+          "text": "Frequent urination with burning sensation"
+        },
+        "subject": {
+          "reference": "Patient/Y"
+        },
+        "onsetDateTime": "2024-10-13"
+      }
+    }
+  ]
+}

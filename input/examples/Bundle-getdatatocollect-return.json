@@ -1,0 +1,310 @@
+{
+  "resourceType": "Bundle",
+  "id": "getdatatocollect-return",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "RequestGroup",
+        "id": "getdatatocollect-return-y",
+        "status": "active",
+        "intent": "proposal",
+        "subject": {
+          "reference": "Patient/Y"
+        },
+        "action": [
+          {
+            "textEquivalent": "Collect pregnancy status",
+            "resource": {
+              "reference": "Task/collect-pregnancy-status"
+            }
+          },
+          {
+            "textEquivalent": "Collect past antibiotic use",
+            "resource": {
+              "reference": "Task/collect-past-antibiotic-use"
+            }
+          },
+          {
+            "textEquivalent": "Collect current meds",
+            "resource": {
+              "reference": "Task/collect-current-meds"
+            }
+          },
+          {
+            "textEquivalent": "Collect nitrites",
+            "resource": {
+              "reference": "Task/collect-nitrites"
+            }
+          },
+          {
+            "textEquivalent": "Collect leukocytes",
+            "resource": {
+              "reference": "Task/collect-leukocytes"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Task",
+        "id": "collect-pregnancy-status",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnairetask"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Questionnaire",
+            "id": "collect-pregnancy-status",
+            "meta": {
+              "profile": [
+                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnaire"
+              ]
+            }
+          }
+        ],
+        "status": "active",
+        "intent": "proposal",
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
+              "code": "collect-information",
+              "display": "Collect information"
+            }
+          ]
+        },
+        "for": {
+          "reference": "Patient/Y"
+        },
+        "input": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
+                  "code": "collect-information",
+                  "display": "Collect information"
+                }
+              ]
+            },
+            "valueReference": {
+              "reference": "#collect-pregnancy-status"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Task",
+        "id": "collect-past-antibiotic-use",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnairetask"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Questionnaire",
+            "id": "collect-past-antibiotic-use",
+            "meta": {
+              "profile": [
+                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnaire"
+              ]
+            }
+          }
+        ],
+        "status": "active",
+        "intent": "proposal",
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
+              "code": "collect-information",
+              "display": "Collect information"
+            }
+          ]
+        },
+        "for": {
+          "reference": "Patient/Y"
+        },
+        "input": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
+                  "code": "collect-information",
+                  "display": "Collect information"
+                }
+              ]
+            },
+            "valueReference": {
+              "reference": "#collect-past-antibiotic-use"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Task",
+        "id": "collect-current-meds",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnairetask"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Questionnaire",
+            "id": "collect-current-meds",
+            "meta": {
+              "profile": [
+                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnaire"
+              ]
+            }
+          }
+        ],
+        "status": "active",
+        "intent": "proposal",
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
+              "code": "collect-information",
+              "display": "Collect information"
+            }
+          ]
+        },
+        "for": {
+          "reference": "Patient/Y"
+        },
+        "input": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
+                  "code": "collect-information",
+                  "display": "Collect information"
+                }
+              ]
+            },
+            "valueReference": {
+              "reference": "#collect-current-meds"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Task",
+        "id": "collect-nitrites",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnairetask"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Questionnaire",
+            "id": "collect-nitrites",
+            "meta": {
+              "profile": [
+                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnaire"
+              ]
+            }
+          }
+        ],
+        "status": "active",
+        "intent": "proposal",
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
+              "code": "collect-information",
+              "display": "Collect information"
+            }
+          ]
+        },
+        "for": {
+          "reference": "Patient/Y"
+        },
+        "input": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
+                  "code": "collect-information",
+                  "display": "Collect information"
+                }
+              ]
+            },
+            "valueReference": {
+              "reference": "#collect-nitrites"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Task",
+        "id": "collect-leukocytes",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnairetask"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Questionnaire",
+            "id": "collect-leukocytes",
+            "meta": {
+              "profile": [
+                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnaire"
+              ]
+            }
+          }
+        ],
+        "status": "active",
+        "intent": "proposal",
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
+              "code": "collect-information",
+              "display": "Collect information"
+            }
+          ]
+        },
+        "for": {
+          "reference": "Patient/Y"
+        },
+        "input": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
+                  "code": "collect-information",
+                  "display": "Collect information"
+                }
+              ]
+            },
+            "valueReference": {
+              "reference": "#collect-leukocytes"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

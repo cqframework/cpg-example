@@ -1,251 +1,317 @@
 {
-    "resourceType": "Bundle",
-    "id": "getdiagnoses-data",
-    "type": "collection",
-    "entry": [
-        {
+  "resourceType": "Bundle",
+  "id": "getdiagnoses-return",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "RequestGroup",
+        "id": "getdiagnoses-return",
+        "status": "active",
+        "intent": "proposal",
+        "subject": {
+          "reference": "Patient/X"
+        },
+        "action": [
+          {
+            "textEquivalent": "Potential diagnosis of Pulmonary Embolism",
             "resource": {
-                "resourceType": "RequestGroup",
-                "id": "getdiagnoses-return-x",
-                "status": "active",
-                "intent": "proposal",
-                "subject": {
-                    "reference": "Patient/X"
-                },
-                "action": [
-                    {
-                        "textEquivalent": "Potential diagnosis of Pulmonary Embolism",
-                        "resource": {
-                            "reference": "Task/x-propose-pulmonary-embolism"
-                        }
-                    },
-                    {
-                        "textEquivalent": "Potential diagnosis of Acute Coronary Syndrome",
-                        "resource": {
-                            "reference": "Task/x-propose-acute-coronary-syndrome"
-                        }
-                    },
-                    {
-                        "textEquivalent": "Potential diagnosis of Pneumothorax",
-                        "resource": {
-                            "reference": "Task/x-propose-pneumothorax"
-                        }
-                    }
+              "reference": "Task/propose-pulmonary-embolism"
+            }
+          },
+          {
+            "textEquivalent": "Potential diagnosis of Acute Coronary Syndrome",
+            "resource": {
+              "reference": "Task/propose-acute-coronary-syndrome"
+            }
+          },
+          {
+            "textEquivalent": "Potential diagnosis of Pneumothorax",
+            "resource": {
+              "reference": "Task/propose-pneumothorax"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Task",
+        "id": "propose-pulmonary-embolism",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-proposediagnosistask",
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-task"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Condition",
+            "id": "proposed-diagnosis",
+            "meta": {
+              "profile": [
+                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-condition"
+              ]
+            },
+            "clinicalStatus": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                  "code": "active"
+                }
+              ]
+            },
+            "verificationStatus": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                  "code": "provisional"
+                }
+              ]
+            },
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                    "code": "problem-list-item"
+                  }
                 ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "XXXXXX",
+                  "display": "Pulmonary embolism"
+                }
+              ],
+              "text": "Pulmonary embolism"
+            },
+            "subject": {
+              "reference": "Patient/X"
+            },
+            "onsetDateTime": "2024-10-13"
+          }
+        ],
+        "status": "active",
+        "intent": "proposal",
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
+              "code": "propose-diagnosis",
+              "display": "Propose a diagnosis"
             }
+          ]
         },
-        {
-            "resource": {
-                "resourceType" : "Task",
-                "id" : "x-propose-pulmonary-embolism",
-                "meta" : {
-                  "profile" : ["http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-proposediagnosistask",
-                  "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-task"]
-                },
-                "contained" : [{
-                  "resourceType" : "Condition",
-                  "id" : "proposed-diagnosis",
-                  "meta" : {
-                    "profile" : ["http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-condition"]
-                  },
-                  "clinicalStatus" : {
-                    "coding" : [{
-                      "system" : "http://terminology.hl7.org/CodeSystem/condition-clinical",
-                      "code" : "active"
-                    }]
-                  },
-                  "verificationStatus" : {
-                    "coding" : [{
-                      "system" : "http://terminology.hl7.org/CodeSystem/condition-ver-status",
-                      "code" : "provisional"
-                    }]
-                  },
-                  "category" : [{
-                    "coding" : [{
-                      "system" : "http://terminology.hl7.org/CodeSystem/condition-category",
-                      "code" : "problem-list-item"
-                    }]
-                  }],
-                  "code" : {
-                    "coding" : [{
-                      "system" : "http://snomed.info/sct",
-                      "code" : "XXXXXX",
-                      "display" : "Pulmonary embolism"
-                    }],
-                    "text" : "Pulmonary embolism"
-                  },
-                  "subject" : {
-                    "reference" : "Patient/X"
-                  },
-                  "onsetDateTime" : "2024-10-13"
-                }],
-                "status" : "active",
-                "intent" : "proposal",
-                "code" : {
-                  "coding" : [{
-                    "system" : "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
-                    "code" : "propose-diagnosis",
-                    "display" : "Propose a diagnosis"
-                  }]
-                },
-                "for" : {
-                  "reference" : "Patient/X"
-                },
-                "input" : [{
-                  "type" : {
-                    "coding" : [{
-                      "system" : "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
-                      "code" : "propose-diagnosis",
-                      "display" : "Propose a diagnosis"
-                    }]
-                  },
-                  "valueReference" : {
-                    "reference" : "#proposed-diagnosis"
-                  }
-                }]
-            }
+        "for": {
+          "reference": "Patient/X"
         },
-        {
-            "resource": {
-                "resourceType" : "Task",
-                "id" : "x-propose-acute-coronary-syndrome",
-                "meta" : {
-                  "profile" : ["http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-proposediagnosistask",
-                  "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-task"]
-                },
-                "contained" : [{
-                  "resourceType" : "Condition",
-                  "id" : "proposed-diagnosis",
-                  "meta" : {
-                    "profile" : ["http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-condition"]
-                  },
-                  "clinicalStatus" : {
-                    "coding" : [{
-                      "system" : "http://terminology.hl7.org/CodeSystem/condition-clinical",
-                      "code" : "active"
-                    }]
-                  },
-                  "verificationStatus" : {
-                    "coding" : [{
-                      "system" : "http://terminology.hl7.org/CodeSystem/condition-ver-status",
-                      "code" : "provisional"
-                    }]
-                  },
-                  "category" : [{
-                    "coding" : [{
-                      "system" : "http://terminology.hl7.org/CodeSystem/condition-category",
-                      "code" : "problem-list-item"
-                    }]
-                  }],
-                  "code" : {
-                    "coding" : [{
-                      "system" : "http://snomed.info/sct",
-                      "code" : "XXXXXX",
-                      "display" : "Acute coronary syndrome"
-                    }],
-                    "text" : "Acute coronary syndrome"
-                  },
-                  "subject" : {
-                    "reference" : "Patient/X"
-                  },
-                  "onsetDateTime" : "2024-10-13"
-                }],
-                "status" : "active",
-                "intent" : "proposal",
-                "code" : {
-                  "coding" : [{
-                    "system" : "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
-                    "code" : "propose-diagnosis",
-                    "display" : "Propose a diagnosis"
-                  }]
-                },
-                "for" : {
-                  "reference" : "Patient/X"
-                },
-                "input" : [{
-                  "type" : {
-                    "coding" : [{
-                      "system" : "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
-                      "code" : "propose-diagnosis",
-                      "display" : "Propose a diagnosis"
-                    }]
-                  },
-                  "valueReference" : {
-                    "reference" : "#proposed-diagnosis"
-                  }
-                }]
+        "input": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
+                  "code": "propose-diagnosis",
+                  "display": "Propose a diagnosis"
+                }
+              ]
+            },
+            "valueReference": {
+              "reference": "#proposed-diagnosis"
             }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Task",
+        "id": "propose-acute-coronary-syndrome",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-proposediagnosistask",
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-task"
+          ]
         },
-        {
-            "resource": {
-                "resourceType" : "Task",
-                "id" : "x-propose-pneumothorax",
-                "meta" : {
-                  "profile" : ["http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-proposediagnosistask",
-                  "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-task"]
-                },
-                "contained" : [{
-                  "resourceType" : "Condition",
-                  "id" : "proposed-diagnosis",
-                  "meta" : {
-                    "profile" : ["http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-condition"]
-                  },
-                  "clinicalStatus" : {
-                    "coding" : [{
-                      "system" : "http://terminology.hl7.org/CodeSystem/condition-clinical",
-                      "code" : "active"
-                    }]
-                  },
-                  "verificationStatus" : {
-                    "coding" : [{
-                      "system" : "http://terminology.hl7.org/CodeSystem/condition-ver-status",
-                      "code" : "provisional"
-                    }]
-                  },
-                  "category" : [{
-                    "coding" : [{
-                      "system" : "http://terminology.hl7.org/CodeSystem/condition-category",
-                      "code" : "problem-list-item"
-                    }]
-                  }],
-                  "code" : {
-                    "coding" : [{
-                      "system" : "http://snomed.info/sct",
-                      "code" : "XXXXXX",
-                      "display" : "Pneumothorax"
-                    }],
-                    "text" : "Pneumothorax"
-                  },
-                  "subject" : {
-                    "reference" : "Patient/X"
-                  },
-                  "onsetDateTime" : "2024-10-13"
-                }],
-                "status" : "active",
-                "intent" : "proposal",
-                "code" : {
-                  "coding" : [{
-                    "system" : "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
-                    "code" : "propose-diagnosis",
-                    "display" : "Propose a diagnosis"
-                  }]
-                },
-                "for" : {
-                  "reference" : "Patient/X"
-                },
-                "input" : [{
-                  "type" : {
-                    "coding" : [{
-                      "system" : "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
-                      "code" : "propose-diagnosis",
-                      "display" : "Propose a diagnosis"
-                    }]
-                  },
-                  "valueReference" : {
-                    "reference" : "#proposed-diagnosis"
+        "contained": [
+          {
+            "resourceType": "Condition",
+            "id": "proposed-diagnosis",
+            "meta": {
+              "profile": [
+                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-condition"
+              ]
+            },
+            "clinicalStatus": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                  "code": "active"
+                }
+              ]
+            },
+            "verificationStatus": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                  "code": "provisional"
+                }
+              ]
+            },
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                    "code": "problem-list-item"
                   }
-                }]
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "XXXXXX",
+                  "display": "Acute coronary syndrome"
+                }
+              ],
+              "text": "Acute coronary syndrome"
+            },
+            "subject": {
+              "reference": "Patient/X"
+            },
+            "onsetDateTime": "2024-10-13"
+          }
+        ],
+        "status": "active",
+        "intent": "proposal",
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
+              "code": "propose-diagnosis",
+              "display": "Propose a diagnosis"
             }
-        }
-    ]
+          ]
+        },
+        "for": {
+          "reference": "Patient/X"
+        },
+        "input": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
+                  "code": "propose-diagnosis",
+                  "display": "Propose a diagnosis"
+                }
+              ]
+            },
+            "valueReference": {
+              "reference": "#proposed-diagnosis"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Task",
+        "id": "propose-pneumothorax",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-proposediagnosistask",
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-task"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Condition",
+            "id": "proposed-diagnosis",
+            "meta": {
+              "profile": [
+                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-condition"
+              ]
+            },
+            "clinicalStatus": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                  "code": "active"
+                }
+              ]
+            },
+            "verificationStatus": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                  "code": "provisional"
+                }
+              ]
+            },
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                    "code": "problem-list-item"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "XXXXXX",
+                  "display": "Pneumothorax"
+                }
+              ],
+              "text": "Pneumothorax"
+            },
+            "subject": {
+              "reference": "Patient/X"
+            },
+            "onsetDateTime": "2024-10-13"
+          }
+        ],
+        "status": "active",
+        "intent": "proposal",
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
+              "code": "propose-diagnosis",
+              "display": "Propose a diagnosis"
+            }
+          ]
+        },
+        "for": {
+          "reference": "Patient/X"
+        },
+        "input": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-activity-type-cs",
+                  "code": "propose-diagnosis",
+                  "display": "Propose a diagnosis"
+                }
+              ]
+            },
+            "valueReference": {
+              "reference": "#proposed-diagnosis"
+            }
+          }
+        ]
+      }
+    }
+  ]
 }
