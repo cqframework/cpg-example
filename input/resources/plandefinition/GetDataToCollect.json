@@ -1,0 +1,107 @@
+{
+    "resourceType": "PlanDefinition",
+    "id": "GetDataToCollect",
+    "url": "http://fhir.org/guides/cqf/cpg/example/PlanDefinition/GetDataToCollect",
+    "type": {
+        "coding": [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/plan-definition-type",
+                "code": "eca-rule"
+            }
+        ]
+    },
+    "action": [
+        {
+            "title": "Determine additional information required",
+            "description": "Given input data, including age, gender, symptoms, and suspected diagnoses, determine what additional information should be collected",
+            "code": [
+                {
+                    "system": "http://hl7.org/fhir/uv/cpg/CodeSystem/cpg-common-process-cs",
+                    "code": "determine-diagnosis"
+                }
+            ],
+            "input": [
+                {
+                    "type": "Patient",
+                    "mustSupport": [
+                        "birthDate",
+                        "gender"
+                    ]
+                },
+                {
+                    "type": "Observation",
+                    "mustSupport": [
+                        "category",
+                        "code",
+                        "value"
+                    ],
+                    "codeFilter": [
+                        {
+                            "path": "category",
+                            "code": [
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                                    "code": "vital-signs"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Condition",
+                    "mustSupport": [
+                        "category",
+                        "code",
+                        "clinicalStatus",
+                        "verificationStatus",
+                        "onset"
+                    ],
+                    "codeFilter": [
+                        {
+                            "path": "category",
+                            "code": [
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                                    "code": "encounter-diagnosis"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                                    "code": "problem-list-item"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Condition",
+                    "codeFilter": [
+                        {
+                            "path": "verificationStatus",
+                            "code": [
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                                    "code": "unconfirmed"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "output": [
+                {
+                    "type": "Task",
+                    "profile": [
+                        "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnairetask",
+                        "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-task"
+                    ]
+                },
+                {
+                    "type": "Questionnaire",
+                    "profile": [
+                        "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnaire"
+                    ]
+                }
+            ]
+        }
+    ]
+}
