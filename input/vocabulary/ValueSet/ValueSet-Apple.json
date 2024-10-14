@@ -1,0 +1,34 @@
+{
+    "resourceType": "ValueSet",
+    "id": "Apple",
+    "url": "http://fhir.org/guides/cqf/cpg/example/ValueSet/Apple",
+    "name": "Apple",
+    "title": "Apple",
+    "status": "active",
+    "experimental": true,
+    "description": "Substance and medication codes for Apple",
+    "compose": {
+        "include": [
+            {
+                "system": "http://snomed.info/sct",
+                "concept": [
+                    {
+                        "code": "735215001",
+                        "display": "Apple (substance)"
+                    }
+                ]
+            }
+        ]
+    },
+    "expansion": {
+        "identifier": "20241014",
+        "timestamp": "2024-10-14T10:43:00-06:00",
+        "contains": [
+            {
+                "system": "http://snomed.info/sct",
+                "code": "735215001",
+                "display": "Apple (substance)"
+            }
+        ]
+    }
+}

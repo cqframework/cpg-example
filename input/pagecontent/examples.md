@@ -1,8 +1,36 @@
-### GetDiagnoses
+### Activity Examples
+
+The activity examples in this implementation guide provide simplified recommendations for each type of activity to support demonstration applications.
+
+#### Order Medication
+
+A recommendation that a patient should receive an apple a day.
+
+This recommendation is intentionally simplified to support demonstration applications. In particular, the logic considers an `active` MedicationRequest for a medication in the `Apple` value set to be sufficient to meet the intent of the recommendation. In other words, the logic does not attempt to track medication dispensing or adherence. Demonstration applications can (and should) take the additional step of demonstrating the dispense of a medication.
+
+##### Test Scenarios
+
+* NeedsDailyApple - A patient without an active order for a daily apple
+* HasDailyApple - A patient with an active order for a daily apple
+* RefusedDailyApple - A patient that refused a recommendation to take a daily apple
+
+##### PlanDefinition
+
+The [DailyAppleRecommendation](PlanDefinition-DailyAppleRecommendation.html) PlanDefinition applies if the patient is active and does not have an active order for a daily apple, or an active order _not_ to prescribe a daily apple.
+
+##### Request
+
+##### Response
+
+### Service Examples
+
+The service examples in this implementation guide provide illustrations of the use of PlanDefinition to describe services where the logic is not expressed in a computable and shareable way, only the inputs and outputs of the service are described. For these examples, the PlanDefinition/$apply operation can still be used, but the implementation of the service is not shareable.
+
+#### GetDiagnoses
 
 A service that returns a set of possible indications, given patient data.
 
-#### Example Scenario
+##### Example Scenario
 
 **Input:** Male 50yo, BMI=35, shortness of breath, chest pain that worsens with deep breathin, impaired kidney function
 **Output:** Possible indications will be
@@ -10,11 +38,11 @@ A service that returns a set of possible indications, given patient data.
 * Acute Coronary Syndrome
 * Pneumothorax
 
-#### PlanDefinition
+##### PlanDefinition
 
 [GetDiagnoses](PlanDefinition-GetDiagnoses.html)
 
-#### Request
+##### Request
 
 $apply:
 
@@ -53,7 +81,7 @@ Body
 
 [GetDiagnoses-Data](Bundle-getdiagnoses-data.html)
 
-#### Response
+##### Response
 
 ```json
 {
@@ -74,13 +102,13 @@ Body
 
 [GetDiagnoses-Return](Bundle-getdiagnoses-return.html)
 
-### GetDataToCollect
+#### GetDataToCollect
 
-#### PlanDefinition
+##### PlanDefinition
 
 [GetDataToCollect](PlanDefinition-GetDataToCollect.html)
 
-#### Request
+##### Request
 
 $apply:
 
@@ -119,7 +147,7 @@ Body
 
 [GetDataToCollect-Data](Bundle-getdatatocollect-data.html)
 
-#### Response
+##### Response
 
 ```json
 {
@@ -140,13 +168,13 @@ Body
 
 [GetDataToCollect-Return](Bundle-getdatatocollect-return.html)
 
-### GetRecommendations
+#### GetRecommendations
 
-#### PlanDefinition
+##### PlanDefinition
 
 [GetRecommendations](PlanDefinition-GetRecommendations.html)
 
-#### Request
+##### Request
 
 $apply:
 
@@ -185,7 +213,7 @@ Body
 
 [GetRecommendations-Data](Bundle-getrecommendations-data.html)
 
-#### Response
+##### Response
 
 ```json
 {

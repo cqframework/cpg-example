@@ -1,0 +1,18 @@
+{
+    "resourceType": "Patient",
+    "id": "HasDailyAppleOrder",
+    "active": true,
+    "name": [
+        {
+            "use": "official",
+            "text": "DailyApple, Has",
+            "family": "DailyApple",
+            "given": [
+                "Has"
+            ]
+        }
+    ],
+    "gender": "male",
+    "birthDate": "1994-05-12",
+    "deceasedBoolean": false
+}

@@ -1,0 +1,62 @@
+{
+    "resourceType": "MedicationRequest",
+    "id": "Refused-RefusedDailyAppleOrder",
+    "meta": {
+        "profile": [
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-medicationrequest"
+        ]
+    },
+    "status": "active",
+    "statusReason": {
+        "coding": [
+            {
+                "system": "http://snomed.info/sct",
+                "code": "182895007",
+                "display": "Drug declined by patient (situation)"
+            }
+        ]
+    },
+    "intent": "order",
+    "priority": "routine",
+    "doNotPerform": true,
+    "medicationCodeableConcept": {
+        "coding": [
+            {
+                "system": "http://snomed.info/sct",
+                "code": "735215001",
+                "display": "Apple (substance)"
+            }        
+        ],
+        "text": "Apple"
+    },
+    "subject": {
+        "reference": "Patient/RefusedDailyAppleOrder"
+    },
+    "basedOn": [
+        {
+            "reference": "MedicationRequest/Refused-DailyAppleProposal"
+        }
+    ],
+    "dosageInstruction": [
+        {
+            "timing": {
+                "repeat": {
+                    "frequency": 1,
+                    "period": 1,
+                    "periodUnit": "d"
+                }
+            },
+            "doseAndRate": [
+                {
+                    "doseQuantity": {
+                        "value": 1,
+                        "code": "{apple}"
+                    },
+                    "rateQuantity": {
+                        "value": 1
+                    }
+                }
+            ]
+        }
+    ]
+}

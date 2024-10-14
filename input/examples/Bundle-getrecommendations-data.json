@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "getdiagnoses-data",
+  "id": "getrecommendations-data",
   "type": "collection",
   "entry": [
     {
