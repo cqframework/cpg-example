@@ -6,6 +6,26 @@
       "candidates" : []
     },
     {
+      "system" : "http://fhir.org/guides/cqf/cpg/example/CodeSystem/ExampleCodes",
+      "authoritative" : [],
+      "candidates" : []
+    },
+    {
+      "system" : "http://fhir.org/guides/cqf/cpg/example/ValueSet/ExampleCodes",
+      "authoritative" : [],
+      "candidates" : []
+    },
+    {
+      "system" : "http://hl7.org/fhir/fhir-types",
+      "authoritative" : [],
+      "candidates" : []
+    },
+    {
+      "system" : "http://hl7.org/fhir/us/cqfmeasures/CodeSystem/software-system-type",
+      "authoritative" : [],
+      "candidates" : []
+    },
+    {
       "system" : "http://ihe.net/qrph/adx/",
       "authoritative" : [],
       "candidates" : []

@@ -47,9 +47,9 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Mon, Aug 12, 2024 01:54+0000 for FHIR v6.0.0-ballot1 
+  Generated on Sun, Nov 17, 2024 19:43+0000 for FHIR v6.0.0-ballot2 
 -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://hl7.org/fhir" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xml="http://www.w3.org/XML/1998/namespace" targetNamespace="http://hl7.org/fhir" elementFormDefault="qualified" version="6.0.0-ballot1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://hl7.org/fhir" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xml="http://www.w3.org/XML/1998/namespace" targetNamespace="http://hl7.org/fhir" elementFormDefault="qualified" version="6.0.0-ballot2">
   <!-- Note: When using this schema with some tools, it may also be necessary to declare xmlns:xml="http://www.w3.org/XML/1998/namespace", however this causes performance issues with other tools and thus is not in the base schemas. -->
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
   <xs:import namespace="http://www.w3.org/1999/xhtml" schemaLocation="fhir-xhtml.xsd"/>
@@ -1011,6 +1011,11 @@
           <xs:documentation xml:lang="en">Person</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="PersonalRelationship">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">PersonalRelationship</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="PlanDefinition">
         <xs:annotation>
           <xs:documentation xml:lang="en">PlanDefinition</xs:documentation>
@@ -1884,6 +1889,11 @@
       <xs:enumeration value="Person">
         <xs:annotation>
           <xs:documentation xml:lang="en">Person</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PersonalRelationship">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">PersonalRelationship</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="PlanDefinition">
@@ -3441,6 +3451,11 @@
           <xs:documentation xml:lang="en">Person</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="PersonalRelationship">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">PersonalRelationship</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="PlanDefinition">
         <xs:annotation>
           <xs:documentation xml:lang="en">PlanDefinition</xs:documentation>
@@ -4386,6 +4401,11 @@
           <xs:documentation xml:lang="en">Person</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="PersonalRelationship">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">PersonalRelationship</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="PlanDefinition">
         <xs:annotation>
           <xs:documentation xml:lang="en">PlanDefinition</xs:documentation>
@@ -5101,9 +5121,14 @@
           <xs:documentation xml:lang="en">6.0.0</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="6.0.0-ballot1">
+      <xs:enumeration value="6.0.0-ballo1">
         <xs:annotation>
           <xs:documentation xml:lang="en">6.0.0-ballot1</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="6.0.0-ballot2">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">6.0.0-ballot2</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
     </xs:restriction>
@@ -11382,6 +11407,7 @@
       <xs:element ref="PaymentReconciliation"/>
       <xs:element ref="Permission"/>
       <xs:element ref="Person"/>
+      <xs:element ref="PersonalRelationship"/>
       <xs:element ref="PlanDefinition"/>
       <xs:element ref="Practitioner"/>
       <xs:element ref="PractitionerRole"/>
@@ -16154,7 +16180,7 @@ A coverage may only be responsible for specific types of charges, and the sequen
           </xs:element>
           <xs:element name="documentation" minOccurs="0" maxOccurs="1" type="markdown">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Documentation about the functionality of the actor.</xs:documentation>
+              <xs:documentation xml:lang="en">Details describing the nature of the actor as well as boundaries that distinguish this type of actor from other actors.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="reference" minOccurs="0" maxOccurs="unbounded" type="url">
@@ -25524,12 +25550,12 @@ of the resource representation.</xs:documentation>
   </xs:complexType>
   <xs:element name="CommunicationRequest" type="CommunicationRequest">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A request to convey information; e.g. the CDS system proposes that an alert be sent to a responsible provider, the CDS system proposes that the public health agency be notified about a reportable condition.</xs:documentation>
+      <xs:documentation xml:lang="en">A request to convey information from a sender to a recipient.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name="CommunicationRequest">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A request to convey information; e.g. the CDS system proposes that an alert be sent to a responsible provider, the CDS system proposes that the public health agency be notified about a reportable condition.</xs:documentation>
+      <xs:documentation xml:lang="en">A request to convey information from a sender to a recipient.</xs:documentation>
       <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -25653,7 +25679,7 @@ of the resource representation.</xs:documentation>
   </xs:complexType>
   <xs:complexType name="CommunicationRequest.Payload">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A request to convey information; e.g. the CDS system proposes that an alert be sent to a responsible provider, the CDS system proposes that the public health agency be notified about a reportable condition.</xs:documentation>
+      <xs:documentation xml:lang="en">A request to convey information from a sender to a recipient.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -27201,7 +27227,7 @@ of the resource representation.</xs:documentation>
           </xs:element>
           <xs:element name="subject" minOccurs="0" maxOccurs="1" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The patient/healthcare practitioner or group of persons to whom this consent applies.</xs:documentation>
+              <xs:documentation xml:lang="en">The patient, healthcare practitioner, research subject, or a group of persons to whom this consent applies.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="date" minOccurs="0" maxOccurs="1" type="date">
@@ -27290,9 +27316,9 @@ of the resource representation.</xs:documentation>
               <xs:documentation xml:lang="en">A Reference that identifies the policy the organization will enforce for this Consent.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="url" minOccurs="0" maxOccurs="1" type="url">
+          <xs:element name="uri" minOccurs="0" maxOccurs="1" type="uri">
             <xs:annotation>
-              <xs:documentation xml:lang="en">A URL that links to a computable version of the policy the organization will enforce for this Consent.</xs:documentation>
+              <xs:documentation xml:lang="en">A URI that links to a computable version of the policy the organization will enforce for this Consent.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -29706,7 +29732,7 @@ of the resource representation.</xs:documentation>
               <xs:documentation xml:lang="en">Unique instance identifiers assigned to a device by manufacturers other organizations or owners.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="definition" minOccurs="0" maxOccurs="1" type="CodeableReference">
+          <xs:element name="definition" minOccurs="0" maxOccurs="1" type="Reference">
             <xs:annotation>
               <xs:documentation xml:lang="en">The reference to the definition for the device.</xs:documentation>
            </xs:annotation>
@@ -31973,14 +31999,24 @@ RegisteredName | UserFriendlyName | PatientReportedName.</xs:documentation>
               <xs:documentation xml:lang="en">Concise and clinically contextualized summary conclusion (interpretation/impression) of the diagnostic report.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="conclusionCode" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
+          <xs:element name="conclusionCode" minOccurs="0" maxOccurs="unbounded" type="CodeableReference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">One or more codes that represent the summary conclusion (interpretation/impression) of the diagnostic report.</xs:documentation>
+              <xs:documentation xml:lang="en">One or more codes and/or references that represent the summary conclusion (interpretation/impression) of the diagnostic report.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="recomendation" minOccurs="0" maxOccurs="unbounded" type="CodeableReference">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Proposed follow-up actions based on the findings and interpretations of the diagnostic test for which this report is the subject.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="presentedForm" minOccurs="0" maxOccurs="unbounded" type="Attachment">
             <xs:annotation>
               <xs:documentation xml:lang="en">Rich text representation of the entire result as issued by the diagnostic service. Multiple formats are allowed but they SHALL be semantically equivalent.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="communication" minOccurs="0" maxOccurs="unbounded" type="Reference">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Communications initiated during the generation of the DiagnosticReport by members of the organization fulfilling that order. e.g. direct communication of time critical results by the radiologist to the referring physician.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -36831,7 +36867,7 @@ See guidance around (not) making local changes to elements [here](canonicalresou
               <xs:documentation xml:lang="en">Business identifiers assigned to this flag by the performer or other systems which remain constant as the resource is updated and propagates from server to server.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="status" minOccurs="1" maxOccurs="1" type="FlagStatus">
+          <xs:element name="status" minOccurs="0" maxOccurs="1" type="FlagStatus">
             <xs:annotation>
               <xs:documentation xml:lang="en">Supports basic workflow.</xs:documentation>
            </xs:annotation>
@@ -37435,7 +37471,7 @@ See guidance around (not) making local changes to elements [here](canonicalresou
           </xs:element>
           <xs:choice minOccurs="0" maxOccurs="1" >
             <xs:annotation>
-              <xs:documentation xml:lang="en">The target value of the focus to be achieved to signify the fulfillment of the goal, e.g. 150 pounds, 7.0%. Either the high or low or both values of the range can be specified. When a low value is missing, it indicates that the goal is achieved at any focus value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any focus value at or above the low value.</xs:documentation>
+              <xs:documentation xml:lang="en">The target value of the focus to be achieved to signify the fulfillment of the goal, e.g. 150 pounds, 7.0%. Either the high or low or both values of the range can be specified. When a low value is missing, it indicates that the goal is achieved at any focus value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any focus value at or above the low value. A CodeableConcept target value could be Positive, Negative, Abnormal, Normal, Present, Absent, Yes, No.</xs:documentation>
             </xs:annotation>
             <xs:element name="detailQuantity" type="Quantity"/>
             <xs:element name="detailRange" type="Range"/>
@@ -38453,6 +38489,11 @@ See guidance around (not) making local changes to elements [here](canonicalresou
       <xs:enumeration value="Person">
         <xs:annotation>
           <xs:documentation xml:lang="en">Person</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PersonalRelationship">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">PersonalRelationship</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="PlanDefinition">
@@ -39652,7 +39693,7 @@ See guidance around (not) making local changes to elements [here](canonicalresou
               <xs:documentation xml:lang="en">A list of the diagnostic requests that resulted in this imaging selection being performed.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="derivedFrom" minOccurs="0" maxOccurs="unbounded" type="Reference">
+          <xs:element name="derivedFrom" minOccurs="0" maxOccurs="1" type="Reference">
             <xs:annotation>
               <xs:documentation xml:lang="en">The imaging study from which the imaging selection is made.</xs:documentation>
            </xs:annotation>
@@ -39674,7 +39715,7 @@ See guidance around (not) making local changes to elements [here](canonicalresou
           </xs:element>
           <xs:element name="frameOfReferenceUid" minOccurs="0" maxOccurs="1" type="id">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The Frame of Reference UID identifying the coordinate system that conveys spatial and/or temporal information for the selected images or frames.</xs:documentation>
+              <xs:documentation xml:lang="en">Uniquely identifies groups of composite instances that have the same coordinate system that conveys spatial and/or temporal information.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="bodySite" minOccurs="0" maxOccurs="unbounded" type="CodeableReference">
@@ -39784,7 +39825,7 @@ If the parent imagingSelection.instance contains a subset element of type frame,
           <xs:element name="coordinate" minOccurs="1" maxOccurs="unbounded" type="decimal">
             <xs:annotation>
               <xs:documentation xml:lang="en">The coordinates describing the image region. Encoded as a set of (column, row) pairs that denote positions in the selected image / frames specified with sub-pixel resolution.
-The origin at the TLHC of the TLHC pixel is 0.0\0.0, the BRHC of the TLHC pixel is 1.0\1.0, and the BRHC of the BRHC pixel is the number of columns\rows in the image / frames. The values must be within the range 0\0 to the number of columns\rows in the image / frames.</xs:documentation>
+The origin at the TLHC of the TLHC pixel is 0.0\0.0, the BRHC of the TLHC pixel is 1.0\1.0, and the BRHC of the BRHC pixel is the number of columns\rows in the image / frames. The values SHALL be within the range 0\0 to the number of columns\rows in the image / frames.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -39805,7 +39846,7 @@ The origin at the TLHC of the TLHC pixel is 0.0\0.0, the BRHC of the TLHC pixel 
           </xs:element>
           <xs:element name="coordinate" minOccurs="1" maxOccurs="unbounded" type="decimal">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The coordinates describing the image region. Encoded as an ordered set of (x,y,z) triplets (in mm and may be negative) that define a region of interest in the patient-relative Reference Coordinate System defined by ImagingSelection.frameOfReferenceUid element.</xs:documentation>
+              <xs:documentation xml:lang="en">The coordinates describing the image region. Encoded as an ordered set of (x,y,z) triplets (in mm and MAY be negative) that define a region of interest in the patient-relative Reference Coordinate System defined by ImagingSelection.frameOfReferenceUid element.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -39894,12 +39935,12 @@ The origin at the TLHC of the TLHC pixel is 0.0\0.0, the BRHC of the TLHC pixel 
   </xs:complexType>
   <xs:element name="ImagingStudy" type="ImagingStudy">
     <xs:annotation>
-      <xs:documentation xml:lang="en">Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities.</xs:documentation>
+      <xs:documentation xml:lang="en">Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study MAY have multiple series of different modalities.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name="ImagingStudy">
     <xs:annotation>
-      <xs:documentation xml:lang="en">Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities.</xs:documentation>
+      <xs:documentation xml:lang="en">Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study MAY have multiple series of different modalities.</xs:documentation>
       <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -39907,7 +39948,7 @@ The origin at the TLHC of the TLHC pixel is 0.0\0.0, the BRHC of the TLHC pixel 
         <xs:sequence>
           <xs:element name="identifier" minOccurs="0" maxOccurs="unbounded" type="Identifier">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Identifiers for the ImagingStudy such as DICOM Study Instance UID.</xs:documentation>
+              <xs:documentation xml:lang="en">Business identifiers assigned to this imaging study by the performer and/or other systems.  These identifiers remain constant as the resource is updated and propagates from server to server. Typically this will include the DICOM Study Instance UID and Accession Number.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="status" minOccurs="1" maxOccurs="1" type="ImagingStudyStatus">
@@ -39917,7 +39958,7 @@ The origin at the TLHC of the TLHC pixel is 0.0\0.0, the BRHC of the TLHC pixel 
           </xs:element>
           <xs:element name="modality" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">A list of all the distinct values of series.modality. This may include both acquisition and non-acquisition modalities.</xs:documentation>
+              <xs:documentation xml:lang="en">A list of all the distinct values of series.modality. This MAY include both acquisition and non-acquisition modalities.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="subject" minOccurs="1" maxOccurs="1" type="Reference">
@@ -39937,7 +39978,7 @@ The origin at the TLHC of the TLHC pixel is 0.0\0.0, the BRHC of the TLHC pixel 
           </xs:element>
           <xs:element name="basedOn" minOccurs="0" maxOccurs="unbounded" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">A list of the diagnostic requests that resulted in this imaging study being performed.</xs:documentation>
+              <xs:documentation xml:lang="en">A plan or order that is fulfilled in whole or in part by this imaging study.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="partOf" minOccurs="0" maxOccurs="unbounded" type="Reference">
@@ -39955,19 +39996,9 @@ The origin at the TLHC of the TLHC pixel is 0.0\0.0, the BRHC of the TLHC pixel 
               <xs:documentation xml:lang="en">The network service providing access (e.g., query, view, or retrieval) for the study. See implementation notes for information about using DICOM endpoints. A study-level endpoint applies to each series in the study, unless overridden by a series-level endpoint with the same Endpoint.connectionType.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="numberOfSeries" minOccurs="0" maxOccurs="1" type="unsignedInt">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Number of Series in the Study. This value given may be larger than the number of series elements this Resource contains due to resource availability, security, or other factors. This element should be present if any series elements are present.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="numberOfInstances" minOccurs="0" maxOccurs="1" type="unsignedInt">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Number of SOP Instances in Study. This value given may be larger than the number of instance elements this resource contains due to resource availability, security, or other factors. This element should be present if any instance elements are present.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
           <xs:element name="procedure" minOccurs="0" maxOccurs="unbounded" type="CodeableReference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">This field corresponds to the DICOM Procedure Code Sequence (0008,1032). This is different from the FHIR Procedure resource that may include the ImagingStudy.</xs:documentation>
+              <xs:documentation xml:lang="en">This field corresponds to the DICOM Procedure Code Sequence (0008,1032). This is different from the FHIR Procedure resource that MAY include the ImagingStudy.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="location" minOccurs="0" maxOccurs="1" type="Reference">
@@ -39982,12 +40013,22 @@ The origin at the TLHC of the TLHC pixel is 0.0\0.0, the BRHC of the TLHC pixel 
           </xs:element>
           <xs:element name="note" minOccurs="0" maxOccurs="unbounded" type="Annotation">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Per the recommended DICOM mapping, this element is derived from the Study Description attribute (0008,1030). Observations or findings about the imaging study should be recorded in another resource, e.g. Observation, and not in this element.</xs:documentation>
+              <xs:documentation xml:lang="en">Per the recommended DICOM mapping, this element is derived from the Study Description attribute (0008,1030). Observations or findings about the imaging study SHOULD be recorded in another resource, e.g. Observation, and not in this element.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="description" minOccurs="0" maxOccurs="1" type="string">
             <xs:annotation>
               <xs:documentation xml:lang="en">The Imaging Manager description of the study. Institution-generated description or classification of the Study (component) performed.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="numberOfSeries" minOccurs="0" maxOccurs="1" type="unsignedInt">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Number of Series in the Study. This value given MAY be larger than the number of series elements this Resource contains due to resource availability, security, or other factors. This element SHOULD be present if any series elements are present.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="numberOfInstances" minOccurs="0" maxOccurs="1" type="unsignedInt">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Number of SOP Instances in Study. This value given MAY be larger than the number of instance elements this resource contains due to resource availability, security, or other factors. This element SHOULD be present if any instance elements are present.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="series" type="ImagingStudy.Series" minOccurs="0" maxOccurs="unbounded">
@@ -40001,7 +40042,7 @@ The origin at the TLHC of the TLHC pixel is 0.0\0.0, the BRHC of the TLHC pixel 
   </xs:complexType>
   <xs:complexType name="ImagingStudy.Series">
     <xs:annotation>
-      <xs:documentation xml:lang="en">Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities.</xs:documentation>
+      <xs:documentation xml:lang="en">Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study MAY have multiple series of different modalities.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -40018,7 +40059,7 @@ The origin at the TLHC of the TLHC pixel is 0.0\0.0, the BRHC of the TLHC pixel 
           </xs:element>
           <xs:element name="modality" minOccurs="1" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The distinct modality for this series. This may include both acquisition and non-acquisition modalities.</xs:documentation>
+              <xs:documentation xml:lang="en">The distinct modality for this series. This MAY include both acquisition and non-acquisition modalities.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="description" minOccurs="0" maxOccurs="1" type="string">
@@ -40028,7 +40069,7 @@ The origin at the TLHC of the TLHC pixel is 0.0\0.0, the BRHC of the TLHC pixel 
           </xs:element>
           <xs:element name="numberOfInstances" minOccurs="0" maxOccurs="1" type="unsignedInt">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Number of SOP Instances in the Study. The value given may be larger than the number of instance elements this resource contains due to resource availability, security, or other factors. This element should be present if any instance elements are present.</xs:documentation>
+              <xs:documentation xml:lang="en">Number of SOP Instances in the Study. The value given MAY be larger than the number of instance elements this resource contains due to resource availability, security, or other factors. This element SHOULD be present if any instance elements are present.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="endpoint" minOccurs="0" maxOccurs="unbounded" type="Reference">
@@ -40038,12 +40079,12 @@ The origin at the TLHC of the TLHC pixel is 0.0\0.0, the BRHC of the TLHC pixel 
           </xs:element>
           <xs:element name="bodySite" minOccurs="0" maxOccurs="1" type="CodeableReference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The anatomic structures examined. See [DICOM Part 16 Annex L](http://dicom.nema.org/medical/dicom/current/output/chtml/part16/chapter_L.html) for DICOM to SNOMED-CT mappings. The bodySite may indicate the laterality of body part imaged; if so, it shall be consistent with any content of ImagingStudy.series.laterality.</xs:documentation>
+              <xs:documentation xml:lang="en">The anatomic structures examined. See [DICOM Part 16 Annex L](http://dicom.nema.org/medical/dicom/current/output/chtml/part16/chapter_L.html) for DICOM to SNOMED-CT mappings. The bodySite MAY indicate the laterality of body part imaged; if so, it SHALL be consistent with any content of ImagingStudy.series.laterality.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="laterality" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The laterality of the (possibly paired) anatomic structures examined. E.g., the left knee, both lungs, or unpaired abdomen. If present, shall be consistent with any laterality information indicated in ImagingStudy.series.bodySite.</xs:documentation>
+              <xs:documentation xml:lang="en">The laterality of the (possibly paired) anatomic structures examined. E.g., the left knee, both lungs, or unpaired abdomen. If present, SHALL be consistent with any laterality information indicated in ImagingStudy.series.bodySite.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="specimen" minOccurs="0" maxOccurs="unbounded" type="Reference">
@@ -40072,7 +40113,7 @@ The origin at the TLHC of the TLHC pixel is 0.0\0.0, the BRHC of the TLHC pixel 
   </xs:complexType>
   <xs:complexType name="ImagingStudy.Performer">
     <xs:annotation>
-      <xs:documentation xml:lang="en">Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities.</xs:documentation>
+      <xs:documentation xml:lang="en">Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study MAY have multiple series of different modalities.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -40093,7 +40134,7 @@ The origin at the TLHC of the TLHC pixel is 0.0\0.0, the BRHC of the TLHC pixel 
   </xs:complexType>
   <xs:complexType name="ImagingStudy.Instance">
     <xs:annotation>
-      <xs:documentation xml:lang="en">Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities.</xs:documentation>
+      <xs:documentation xml:lang="en">Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study MAY have multiple series of different modalities.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -50896,7 +50937,7 @@ The primary difference between a medicationstatement and a medicationadministrat
           </xs:element>
           <xs:element name="focus" minOccurs="0" maxOccurs="unbounded" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The actual focus of an observation when it is not the patient of record representing something or someone associated with the patient such as a spouse, parent, fetus, or donor. For example, fetus observations in a mother's record.  The focus of an observation could also be an existing condition,  an intervention, the subject's diet,  another observation of the subject,  or a body structure such as tumor or implanted device.   An example use case would be using the Observation resource to capture whether the mother is trained to change her child's tracheostomy tube. In this example, the child is the patient of record and the mother is the focus.</xs:documentation>
+              <xs:documentation xml:lang="en">The actual focus of an observation when it is not the patient of record representing something or someone associated with the patient such as a spouse, parent, fetus, or donor. For example, fetus observations in a mother's record.  The focus of an observation could also be an existing condition,  an intervention, the subject's diet,  another observation of the subject,  or a body structure such as tumor or implanted device.   An example use case would be using the Observation resource to capture whether the mother is trained to change her child's tracheostomy tube. In this example, the child is the patient of record and the mother is the focus. As another use case,        a caregiver (RelatedPerson) has back strain and is unable to provide ADL support to a patient (Subject).</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="encounter" minOccurs="0" maxOccurs="1" type="Reference">
@@ -51134,6 +51175,11 @@ Reflex | Repeat | Re-run.</xs:documentation>
           <xs:documentation xml:lang="en">Registered</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="specimen-in-process">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Specimen-in-Process</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="preliminary">
         <xs:annotation>
           <xs:documentation xml:lang="en">Preliminary</xs:documentation>
@@ -51172,6 +51218,11 @@ Reflex | Repeat | Re-run.</xs:documentation>
       <xs:enumeration value="unknown">
         <xs:annotation>
           <xs:documentation xml:lang="en">Unknown</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="cannot-be-obtained">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Cannot be obtained</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
     </xs:restriction>
@@ -52864,7 +52915,7 @@ Deceased patients may also be marked as inactive for the same reasons, but may b
           </xs:element>
           <xs:choice minOccurs="0" maxOccurs="1" >
             <xs:annotation>
-              <xs:documentation xml:lang="en">Indicates if the individual is deceased or not.</xs:documentation>
+              <xs:documentation xml:lang="en">Indicates the date when the individual died, or, if the date is not known or cannot be estimated, a flag indicating the patient is known to be deceased.</xs:documentation>
             </xs:annotation>
             <xs:element name="deceasedBoolean" type="boolean"/>
             <xs:element name="deceasedDateTime" type="dateTime"/>
@@ -53861,6 +53912,58 @@ Deceased patients may also be marked as inactive for the same reasons, but may b
     <xs:complexContent>
       <xs:extension base="Element">
         <xs:attribute name="value" type="IdentityAssuranceLevelEnum" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PersonalRelationship" type="PersonalRelationship">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">The details of a direct relationship between two individuals. It does not contain information about the individuals themselves, just the relationship itself.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="PersonalRelationship">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">The details of a direct relationship between two individuals. It does not contain information about the individuals themselves, just the relationship itself.</xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="DomainResource">
+        <xs:sequence>
+          <xs:element name="source" minOccurs="1" maxOccurs="1" type="Reference">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The source is the individual that is described by the relationshipType.  In human language, you would say that `source` is the `relationship` of `target`.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="relationshipType" minOccurs="1" maxOccurs="1" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The relationship the source has with the target.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="target" minOccurs="1" maxOccurs="1" type="Reference">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The `target` is the individual to which the `source` is related.  In human language, you would say that **source** is the **relationshipType** of **target**.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="period" minOccurs="0" maxOccurs="unbounded" type="Period">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The period of time during which this relationship is or was active. If there are no dates defined, then the interval is unknown.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="confidence" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">A coded representation of the confidence in the validity of the relationship.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="asserter" minOccurs="0" maxOccurs="1" type="Reference">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The asserter of the relationship. Typically is the source of the relationship information. (The relationship was reported by ...).</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="group" minOccurs="0" maxOccurs="unbounded" type="Reference">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Some relationships are applicable within the context of a specific group. Such as a caregiver within a specific household.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -58193,7 +58296,7 @@ Deceased patients may also be marked as inactive for the same reasons, but may b
           </xs:element>
           <xs:element name="code" minOccurs="0" maxOccurs="1" type="CodeableReference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">A code or reference that identifies a particular service (i.e., procedure, diagnostic investigation, or panel of investigations) that have been requested.</xs:documentation>
+              <xs:documentation xml:lang="en">A code or reference that identifies a particular service (i.e., procedure, diagnostic investigation, or panel of investigations) that has been requested.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="orderDetail" type="ServiceRequest.OrderDetail" minOccurs="0" maxOccurs="unbounded">
@@ -62801,12 +62904,12 @@ Deceased patients may also be marked as inactive for the same reasons, but may b
   </xs:complexType>
   <xs:element name="Task" type="Task">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A task to be performed as a part of a workflow and the related informations like inputs, outputs and execution progress. While very simple workflows can be implemented with Request alone, most workflows would require a Task (explicit or contained) as a means to track the execution data (i.e. inputs, outputs, status). Please refer to the workflow page for more details.</xs:documentation>
+      <xs:documentation xml:lang="en">A task to be performed as a part of a workflow and the related informations like inputs, outputs and execution progress. While very simple workflows can be implemented with [[[Request]]] alone, most workflows would require a [[[Task]]] (explicit or contained) as a means to track the execution data (i.e. inputs, outputs, status). Please refer to [Fulfillment/Execution](request.html#fulfillment).</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name="Task">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A task to be performed as a part of a workflow and the related informations like inputs, outputs and execution progress. While very simple workflows can be implemented with Request alone, most workflows would require a Task (explicit or contained) as a means to track the execution data (i.e. inputs, outputs, status). Please refer to the workflow page for more details.</xs:documentation>
+      <xs:documentation xml:lang="en">A task to be performed as a part of a workflow and the related informations like inputs, outputs and execution progress. While very simple workflows can be implemented with [[[Request]]] alone, most workflows would require a [[[Task]]] (explicit or contained) as a means to track the execution data (i.e. inputs, outputs, status). Please refer to [Fulfillment/Execution](request.html#fulfillment).</xs:documentation>
       <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -62859,7 +62962,7 @@ Deceased patients may also be marked as inactive for the same reasons, but may b
           </xs:element>
           <xs:element name="intent" minOccurs="1" maxOccurs="1" type="TaskIntent">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Indicates the &quot;level&quot; of actionability associated with the Task, i.e. i+R[9]Cs this a proposed task, a planned task, an actionable task, etc.</xs:documentation>
+              <xs:documentation xml:lang="en">Indicates the &quot;level&quot; of actionability associated with the Task, i.e. this a proposed task, a planned task, an actionable task, etc.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="priority" minOccurs="0" maxOccurs="1" type="RequestPriority">
@@ -62954,7 +63057,7 @@ Deceased patients may also be marked as inactive for the same reasons, but may b
           </xs:element>
           <xs:element name="note" minOccurs="0" maxOccurs="unbounded" type="Annotation">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Free-text information captured about the task as it progresses.</xs:documentation>
+              <xs:documentation xml:lang="en">Free-text information about the task during its lifecycle.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="relevantHistory" minOccurs="0" maxOccurs="unbounded" type="Reference">
@@ -62983,7 +63086,7 @@ Deceased patients may also be marked as inactive for the same reasons, but may b
   </xs:complexType>
   <xs:complexType name="Task.Performer">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A task to be performed as a part of a workflow and the related informations like inputs, outputs and execution progress. While very simple workflows can be implemented with Request alone, most workflows would require a Task (explicit or contained) as a means to track the execution data (i.e. inputs, outputs, status). Please refer to the workflow page for more details.</xs:documentation>
+      <xs:documentation xml:lang="en">A task to be performed as a part of a workflow and the related informations like inputs, outputs and execution progress. While very simple workflows can be implemented with [[[Request]]] alone, most workflows would require a [[[Task]]] (explicit or contained) as a means to track the execution data (i.e. inputs, outputs, status). Please refer to [Fulfillment/Execution](request.html#fulfillment).</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -63004,7 +63107,7 @@ Deceased patients may also be marked as inactive for the same reasons, but may b
   </xs:complexType>
   <xs:complexType name="Task.Restriction">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A task to be performed as a part of a workflow and the related informations like inputs, outputs and execution progress. While very simple workflows can be implemented with Request alone, most workflows would require a Task (explicit or contained) as a means to track the execution data (i.e. inputs, outputs, status). Please refer to the workflow page for more details.</xs:documentation>
+      <xs:documentation xml:lang="en">A task to be performed as a part of a workflow and the related informations like inputs, outputs and execution progress. While very simple workflows can be implemented with [[[Request]]] alone, most workflows would require a [[[Task]]] (explicit or contained) as a means to track the execution data (i.e. inputs, outputs, status). Please refer to [Fulfillment/Execution](request.html#fulfillment).</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -63030,14 +63133,14 @@ Deceased patients may also be marked as inactive for the same reasons, but may b
   </xs:complexType>
   <xs:complexType name="Task.Input">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A task to be performed as a part of a workflow and the related informations like inputs, outputs and execution progress. While very simple workflows can be implemented with Request alone, most workflows would require a Task (explicit or contained) as a means to track the execution data (i.e. inputs, outputs, status). Please refer to the workflow page for more details.</xs:documentation>
+      <xs:documentation xml:lang="en">A task to be performed as a part of a workflow and the related informations like inputs, outputs and execution progress. While very simple workflows can be implemented with [[[Request]]] alone, most workflows would require a [[[Task]]] (explicit or contained) as a means to track the execution data (i.e. inputs, outputs, status). Please refer to [Fulfillment/Execution](request.html#fulfillment).</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
         <xs:sequence>
           <xs:element name="type" minOccurs="1" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">A code or description indicating how the input is intended to be used as part of the task execution.</xs:documentation>
+              <xs:documentation xml:lang="en">A code or description to distinguish between inputs.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:choice minOccurs="1" maxOccurs="1" >
@@ -63105,14 +63208,14 @@ Deceased patients may also be marked as inactive for the same reasons, but may b
   </xs:complexType>
   <xs:complexType name="Task.Output">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A task to be performed as a part of a workflow and the related informations like inputs, outputs and execution progress. While very simple workflows can be implemented with Request alone, most workflows would require a Task (explicit or contained) as a means to track the execution data (i.e. inputs, outputs, status). Please refer to the workflow page for more details.</xs:documentation>
+      <xs:documentation xml:lang="en">A task to be performed as a part of a workflow and the related informations like inputs, outputs and execution progress. While very simple workflows can be implemented with [[[Request]]] alone, most workflows would require a [[[Task]]] (explicit or contained) as a means to track the execution data (i.e. inputs, outputs, status). Please refer to [Fulfillment/Execution](request.html#fulfillment).</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
         <xs:sequence>
           <xs:element name="type" minOccurs="1" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The name of the Output parameter.</xs:documentation>
+              <xs:documentation xml:lang="en">A code or description to distinguish between outputs.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:choice minOccurs="1" maxOccurs="1" >
@@ -65897,14 +66000,9 @@ Deceased patients may also be marked as inactive for the same reasons, but may b
               <xs:documentation xml:lang="en">Identifier for the transport event that is used to identify it across multiple disparate systems.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="instantiatesCanonical" minOccurs="0" maxOccurs="1" type="canonical">
+          <xs:element name="instantiates" minOccurs="0" maxOccurs="1" type="canonical">
             <xs:annotation>
               <xs:documentation xml:lang="en">The URL pointing to a *FHIR*-defined protocol, guideline, orderset or other definition that is adhered to in whole or in part by this Transport.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="instantiatesUri" minOccurs="0" maxOccurs="1" type="uri">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The URL pointing to an *externally* maintained  protocol, guideline, orderset or other definition that is adhered to in whole or in part by this Transport.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="basedOn" minOccurs="0" maxOccurs="unbounded" type="Reference">
@@ -65930,16 +66028,6 @@ Deceased patients may also be marked as inactive for the same reasons, but may b
           <xs:element name="statusReason" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">An explanation as to why this transport is held, failed, was refused, etc.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="intent" minOccurs="1" maxOccurs="1" type="TransportIntent">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Indicates the &quot;level&quot; of actionability associated with the Transport, i.e. i+R[9]Cs this a proposed transport, a planned transport, an actionable transport, etc.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="priority" minOccurs="0" maxOccurs="1" type="RequestPriority">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Indicates how quickly the Transport should be addressed with respect to other requests.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="code" minOccurs="0" maxOccurs="1" type="CodeableConcept">
@@ -66229,66 +66317,6 @@ Deceased patients may also be marked as inactive for the same reasons, but may b
             <xs:element name="valueMeta" type="Meta"/>
           </xs:choice>
         </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:simpleType name="TransportIntentEnum">
-    <xs:restriction base="code-primitive">
-      <xs:enumeration value="unknown">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Unknown</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="proposal">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Proposal</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="plan">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Plan</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="order">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Order</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="original-order">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Original Order</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="reflex-order">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Reflex Order</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="filler-order">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Filler Order</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="instance-order">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Instance Order</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="option">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Option</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name="TransportIntent">
-    <xs:annotation>
-      <xs:documentation xml:lang="en"></xs:documentation>
-      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="Element">
-        <xs:attribute name="value" type="TransportIntentEnum" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
