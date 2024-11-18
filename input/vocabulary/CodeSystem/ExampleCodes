@@ -7,6 +7,8 @@
     "experimental": true,
     "status": "active",
     "description": "Example codes for the example CPG IG",
+    "content": "complete",
+    "caseSensitive": true,
     "concept": [
         {
             "code": "sugar",

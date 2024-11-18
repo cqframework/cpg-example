@@ -61,12 +61,13 @@
             "id": "collect-pregnancy-status",
             "meta": {
               "profile": [
-                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnaire"
+                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-computablequestionnaire"
               ]
-            }
+            },
+            "status": "active"
           }
         ],
-        "status": "active",
+        "status": "requested",
         "intent": "proposal",
         "code": {
           "coding": [
@@ -91,9 +92,7 @@
                 }
               ]
             },
-            "valueReference": {
-              "reference": "#collect-pregnancy-status"
-            }
+            "valueCanonical": "#collect-pregnancy-status"
           }
         ]
       }
@@ -113,12 +112,13 @@
             "id": "collect-past-antibiotic-use",
             "meta": {
               "profile": [
-                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnaire"
+                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-computablequestionnaire"
               ]
-            }
+            },
+            "status": "active"
           }
         ],
-        "status": "active",
+        "status": "requested",
         "intent": "proposal",
         "code": {
           "coding": [
@@ -143,9 +143,7 @@
                 }
               ]
             },
-            "valueReference": {
-              "reference": "#collect-past-antibiotic-use"
-            }
+            "valueCanonical": "#collect-past-antibiotic-use"
           }
         ]
       }
@@ -165,12 +163,13 @@
             "id": "collect-current-meds",
             "meta": {
               "profile": [
-                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnaire"
+                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-computablequestionnaire"
               ]
-            }
+            },
+            "status": "active"
           }
         ],
-        "status": "active",
+        "status": "requested",
         "intent": "proposal",
         "code": {
           "coding": [
@@ -195,9 +194,7 @@
                 }
               ]
             },
-            "valueReference": {
-              "reference": "#collect-current-meds"
-            }
+            "valueCanonical": "#collect-current-meds"
           }
         ]
       }
@@ -217,12 +214,13 @@
             "id": "collect-nitrites",
             "meta": {
               "profile": [
-                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnaire"
+                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-computablequestionnaire"
               ]
-            }
+            },
+            "status": "active"
           }
         ],
-        "status": "active",
+        "status": "requested",
         "intent": "proposal",
         "code": {
           "coding": [
@@ -247,9 +245,7 @@
                 }
               ]
             },
-            "valueReference": {
-              "reference": "#collect-nitrites"
-            }
+            "valueCanonical": "#collect-nitrites"
           }
         ]
       }
@@ -269,12 +265,13 @@
             "id": "collect-leukocytes",
             "meta": {
               "profile": [
-                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnaire"
+                "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-computablequestionnaire"
               ]
-            }
+            },
+            "status": "active"
           }
         ],
-        "status": "active",
+        "status": "requested",
         "intent": "proposal",
         "code": {
           "coding": [
@@ -299,9 +296,7 @@
                 }
               ]
             },
-            "valueReference": {
-              "reference": "#collect-leukocytes"
-            }
+            "valueCanonical": "#collect-leukocytes"
           }
         ]
       }

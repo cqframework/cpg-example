@@ -179,6 +179,9 @@
         "intent": "proposal",
         "code": {
           "text": "CT Pulmonary Angiography"
+        },
+        "subject": {
+          "reference": "Patient/X"
         }
       }
     },
@@ -203,6 +206,9 @@
         "intent": "proposal",
         "code": {
           "text": "Ventilation-Perfusion (V/Q) Scan"
+        },
+        "subject": {
+          "reference": "Patient/X"
         }
       }
     },
@@ -227,6 +233,9 @@
         "intent": "proposal",
         "code": {
           "text": "MRI with Gd Contrast"
+        },
+        "subject": {
+          "reference": "Patient/X"
         }
       }
     }

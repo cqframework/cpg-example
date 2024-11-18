@@ -68,7 +68,7 @@
     {
       "resource": {
         "resourceType": "Condition",
-        "id": "Frequent urination with burning sensation",
+        "id": "frequent-urination-with-burning-sensation",
         "clinicalStatus": {
           "coding": [
             {

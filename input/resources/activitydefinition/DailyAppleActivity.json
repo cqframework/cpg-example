@@ -34,6 +34,8 @@
                 {
                     "doseQuantity": {
                         "value": 1,
+                        "unit": "apple",
+                        "system": "http://unitsofmeasure.org",
                         "code": "{apple}"
                     },
                     "rateQuantity": {

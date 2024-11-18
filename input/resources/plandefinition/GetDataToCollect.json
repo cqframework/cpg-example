@@ -98,7 +98,7 @@
                 {
                     "type": "Questionnaire",
                     "profile": [
-                        "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-questionnaire"
+                        "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-computablequestionnaire"
                     ]
                 }
             ]
