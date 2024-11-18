@@ -6,7 +6,7 @@
             "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-medicationrequest"
         ]
     },
-    "status": "completed",
+    "status": "active",
     "intent": "proposal",
     "priority": "routine",
     "medicationCodeableConcept": {

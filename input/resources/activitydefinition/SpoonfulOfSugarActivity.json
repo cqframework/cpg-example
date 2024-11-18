@@ -1,0 +1,17 @@
+{
+    "resourceType": "ActivityDefinition",
+    "id": "SpoonfulOfSugarActivity",
+    "url": "http://fhir.org/guides/cqf/cpg/example/ActivityDefinition/SpoonfulOfSugarActivity",
+    "name": "SpoonfulOfSugarActivity",
+    "title": "Spoonful Of Sugar Activity",
+    "status": "active",
+    "experimental": true,
+    "description": "Activity to provide a spoonful of sugar for patients with active medications",
+    "kind": "ServiceRequest",
+    "profile": "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-servicerequest",
+    "code": {
+        "text": "Spoonful Of Sugar"
+    },
+    "intent": "proposal",
+    "priority": "routine"
+}

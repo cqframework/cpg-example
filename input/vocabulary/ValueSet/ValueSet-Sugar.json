@@ -1,0 +1,34 @@
+{
+    "resourceType": "ValueSet",
+    "id": "Sugar",
+    "url": "http://fhir.org/guides/cqf/cpg/example/ValueSet/Sugar",
+    "name": "Sugar",
+    "title": "Sugar",
+    "status": "active",
+    "experimental": true,
+    "description": "Substance codes for Sugar",
+    "compose": {
+        "include": [
+            {
+                "system": "http://fhir.org/guides/cqf/cpg/example/ValueSet/ExampleCodes",
+                "concept": [
+                    {
+                        "code": "sugar",
+                        "display": "Sugar"
+                    }
+                ]
+            }
+        ]
+    },
+    "expansion": {
+        "identifier": "20241014",
+        "timestamp": "2024-10-14T10:43:00-06:00",
+        "contains": [
+            {
+                "system": "http://fhir.org/guides/cqf/cpg/example/CodeSystem/ExampleCodes",
+                "code": "sugar",
+                "display": "Sugar"
+            }
+        ]
+    }
+}

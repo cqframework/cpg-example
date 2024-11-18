@@ -1,0 +1,17 @@
+{
+    "resourceType": "CodeSystem",
+    "id": "ExampleCodes",
+    "url": "http://fhir.org/guides/cqf/cpg/example/CodeSystem/ExampleCodes",
+    "name": "ExampleCodes",
+    "title": "Example Codes",
+    "experimental": true,
+    "status": "active",
+    "description": "Example codes for the example CPG IG",
+    "concept": [
+        {
+            "code": "sugar",
+            "display": "Sugar",
+            "definition": "A sweet substance that helps medicine go down"
+        }
+    ]
+}

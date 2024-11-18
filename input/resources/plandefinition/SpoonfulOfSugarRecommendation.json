@@ -1,0 +1,26 @@
+{
+    "resourceType": "PlanDefinition",
+    "id": "SpoonfulOfSugarRecommendation",
+    "url": "http://fhir.org/guides/cqf/cpg/example/PlanDefinition/SpoonfulOfSugarRecommendation",
+    "name": "SpoonfulOfSugarRecommendation",
+    "title": "Spoonful Of Sugar Recommendation",
+    "description": "A spoonful of sugar helps the medicine go down",
+    "library": [
+        "http://fhir.org/guides/cqf/cpg/example/Library/SpoonfulOfSugarLogic"
+    ],
+    "action": [
+        {
+            "textEquivalent": "A spoonful of sugar helps the medicine go down",
+            "condition": [
+                {
+                    "kind": "applicability",
+                    "expression": {
+                        "lanugage": "text/cql-identifier",
+                        "expression": "Should Recommend Spoonful Of Sugar" 
+                    }
+                }
+            ],
+            "definitionCanonical": "http://fhir.org/guides/cqf/cpg/example/ActivityDefinition/SpoonfulOfSugarActivity"
+        }
+    ]
+}

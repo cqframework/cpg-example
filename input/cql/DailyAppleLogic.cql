@@ -17,12 +17,13 @@ define "Active Daily Apple Order":
       and M.status = 'active'
       and M.doNotPerform is not true
 
-define "Contraindications For Daily Apple Order":
+define "Prohibitions For Daily Apple Order":
   [MedicationRequest: "Apple"] M
     where M.intent = 'order'
       and M.status = 'active'
       and M.doNotPerform is true
 
 define "No Daily Apple Order":
-  not exists ("Active Daily Apple Order")
-    and not exists ("Contraindications For Daily Apple Order")
+  "Inclusion Criteria"
+    and not exists ("Active Daily Apple Order")
+    and not exists ("Prohibitions For Daily Apple Order")

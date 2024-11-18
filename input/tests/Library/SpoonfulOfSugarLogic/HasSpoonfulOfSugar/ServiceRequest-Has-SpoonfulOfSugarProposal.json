@@ -1,0 +1,28 @@
+{
+    "resourceType": "ServiceRequest",
+    "id": "Has-SpoonfulOfSugarProposal",
+    "meta": {
+        "profile": [
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-servicerequest"
+        ]
+    },
+    "status": "active",
+    "intent": "proposal",
+    "priority": "routine",
+    "code": {
+        "coding": [
+            {
+                "system": "http://fhir.org/guides/cqf/cpg/example/CodeSystem/ExampleCodes",
+                "code": "sugar",
+                "display": "Sugar"
+            }        
+        ],
+        "text": "Sugar"
+    },
+    "subject": {
+        "reference": "Patient/HasSpoonfulOfSugar"
+    },
+    "instantiatesCanonical": [
+        "http://fhir.org/guides/cqf/cpg/example/ActivityDefinition/SpoonfulOfSugarActivity"
+    ]
+}

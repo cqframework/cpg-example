@@ -1,13 +1,13 @@
 {
     "resourceType": "MedicationRequest",
-    "id": "Has-DailyAppleProposal",
+    "id": "DailyAppleOrder",
     "meta": {
         "profile": [
             "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-medicationrequest"
         ]
     },
     "status": "active",
-    "intent": "proposal",
+    "intent": "order",
     "priority": "routine",
     "medicationCodeableConcept": {
         "coding": [
@@ -20,10 +20,12 @@
         "text": "Apple"
     },
     "subject": {
-        "reference": "Patient/HasDailyAppleOrder"
+        "reference": "Patient/RefusedSpoonfulOfSugar"
     },
-    "instantiatesCanonical": [
-        "http://fhir.org/guides/cqf/cpg/example/ActivityDefinition/DailyAppleActivity"
+    "basedOn": [
+        {
+            "reference": "MedicationRequest/Has-DailyAppleProposal"
+        }
     ],
     "dosageInstruction": [
         {

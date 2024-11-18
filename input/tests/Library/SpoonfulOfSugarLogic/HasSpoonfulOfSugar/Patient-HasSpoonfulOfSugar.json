@@ -1,0 +1,18 @@
+{
+    "resourceType": "Patient",
+    "id": "HasSpoonfulOfSugar",
+    "active": true,
+    "name": [
+        {
+            "use": "official",
+            "text": "SpoonfulOfSugar, Has",
+            "family": "SpoonfulOfSugar",
+            "given": [
+                "Has"
+            ]
+        }
+    ],
+    "gender": "male",
+    "birthDate": "1994-05-12",
+    "deceasedBoolean": false
+}
