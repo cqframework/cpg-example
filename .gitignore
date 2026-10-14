@@ -4,6 +4,7 @@ temp
 template
 output
 input-cache
+input/tests/results
 
 # Don't commit this because it's so large #
 ###########################################
@@ -23,3 +24,4 @@ Thumbs.db
 # backup files #
 ################
 *.bak
+Requirements-fromNarrative.json

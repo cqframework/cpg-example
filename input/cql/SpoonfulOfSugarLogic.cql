@@ -9,7 +9,7 @@ valueset "Sugar": 'http://fhir.org/guides/cqf/cpg/example/ValueSet/Sugar'
 context Patient
 
 define "Inclusion Criteria":
-  Patient.active
+  Patient.active.value
     and exists "Active Medications"
 
 define "Active Medications":

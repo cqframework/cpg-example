@@ -9,7 +9,7 @@ valueset "Apple": 'http://fhir.org/guides/cqf/cpg/example/ValueSet/Apple'
 context Patient
 
 define "Inclusion Criteria":
-  Patient.active
+  Patient.active.value
 
 define "Active Daily Apple Order":
   [MedicationRequest: "Apple"] M
