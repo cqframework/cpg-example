@@ -106,6 +106,10 @@
     </parameter>
     <parameter>
       <code value="path-resource" />
+      <value value="input/resources/plandefinition"/>
+    </parameter>
+    <parameter>
+      <code value="path-resource" />
       <value value="input/resources/device"/>
     </parameter>
     <parameter>

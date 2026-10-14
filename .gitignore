@@ -3,6 +3,7 @@
 temp
 template
 output
+input-cache
 
 # Don't commit this because it's so large #
 ###########################################
