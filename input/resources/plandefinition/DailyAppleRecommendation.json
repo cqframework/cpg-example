@@ -10,6 +10,8 @@
     ],
     "action": [
         {
+            "id": "daily-apple",
+            "title": "Recommend a daily apple",
             "textEquivalent": "An apple a day keeps the doctor away",
             "condition": [
                 {

@@ -6,9 +6,11 @@
             "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-servicerequest"
         ]
     },
-    "basedOn": {
-        "reference": "ServiceRequest/Refused-SpoonfulOfSugarProposal"
-    },
+    "basedOn": [
+        {
+            "reference": "ServiceRequest/Refused-SpoonfulOfSugarProposal"
+        }
+    ],
     "status": "active",
     "statusReason": {
         "coding": [
