@@ -17,7 +17,7 @@ Each recommendation has CQL logic in `input/cql/` and test cases in `input/tests
 | SpoonfulOfSugarLogic | NeedsSpoonfulOfSugar | Spoonful of sugar proposed |
 | | DoesNotNeedSpoonfulOfSugar, HasSpoonfulOfSugar, RefusedSpoonfulOfSugar | Nothing proposed |
 
-**Whenever you change the resources in `input/tests`**, run `bin/build-test-bundles.sh`. It regenerates the example bundles (`input/examples/Bundle-<TestCase>.json`, which end up in the FHIR package) and the request bodies of the Postman collection. Commit the results.
+**Whenever you change the resources in `input/tests`**, run `node bin/build-test-bundles.js` (requires [Node.js](https://nodejs.org/) 18 or later). It regenerates the example bundles (`input/examples/Bundle-<TestCase>.json`, which end up in the FHIR package) and the request bodies of the Postman collection. Commit the results.
 
 ## Test locally (CQL only)
 
@@ -48,11 +48,11 @@ The FHIR server and cpg-review below run in Docker.
 
    Leave it running in this terminal. Startup takes a minute or so; it's ready when [http://localhost:8080/fhir/metadata](http://localhost:8080/fhir/metadata) returns a CapabilityStatement. The server keeps its data only as long as the container exists, so after starting a new container, load the resources again (step 3). Stop it with Ctrl+C.
 
-2. Build the IG (`./_updatePublisher.sh` once, then `./_genonce.sh`), so `output/` contains the Libraries with compiled CQL.
-3. Load the conformance resources (CodeSystem, ValueSets, Libraries, ActivityDefinitions, PlanDefinitions):
+2. Build the IG, so `output/` contains the Libraries with compiled CQL. On macOS/Linux run `./_updatePublisher.sh` once, then `./_genonce.sh`; on Windows run `_updatePublisher.bat` once, then `_genonce.bat`.
+3. Load the conformance resources (CodeSystem, ValueSets, Libraries, ActivityDefinitions, PlanDefinitions), using [Node.js](https://nodejs.org/) 18 or later:
 
    ```sh
-   bin/load-fhir-server.sh   # optionally pass a base URL, default http://localhost:8080/fhir
+   node bin/load-fhir-server.js   # optionally pass a base URL, default http://localhost:8080/fhir
    ```
 
    Do not load the test data: each request passes its test case inline, and a patient that is also stored on the server is seen twice, which makes the CQL fail.
@@ -69,12 +69,12 @@ cpg-review, part of the [Reason Framework](https://github.com/reason-healthcare/
    ```sh
    git clone https://github.com/reason-healthcare/reason-framework.git
    cd reason-framework
-   ./bin/docker-build-cpg-review   # once, and again after pulling updates
-   ./bin/docker-run-cpg-review
+   docker build -f packages/cpg-review/Dockerfile -t reason-framework-cpg-review:latest .   # once, and again after pulling updates
+   docker run --rm --name reason-cpg-review --add-host=host.docker.internal:host-gateway -p 3000:3000 reason-framework-cpg-review:latest
    ```
 
-   Open [http://localhost:3000](http://localhost:3000). (Use `HOST_PORT=3001 ./bin/docker-run-cpg-review` if port 3000 is taken.) The default endpoints (`http://localhost:8080/fhir`) point at the HAPI server; the container reaches it through `host.docker.internal`. Stop it with Ctrl+C.
+   (On macOS/Linux, `./bin/docker-build-cpg-review` and `./bin/docker-run-cpg-review` do the same.) Open [http://localhost:3000](http://localhost:3000). If port 3000 is taken, use e.g. `-p 3001:3000` and open port 3001 instead. The default endpoints (`http://localhost:8080/fhir`) point at the HAPI server; the container reaches it through `host.docker.internal`. Stop it with Ctrl+C.
 
-3. Build the IG with `./_genonce.sh`.
+3. Build the IG with `./_genonce.sh` (Windows: `_genonce.bat`).
 4. Upload `output/package.tgz`, pick a PlanDefinition, and under **Add Context** pick one of the test case bundles from the package as the patient. Then apply.
 

@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "00cf7b76-e4f9-43c6-95e2-132962c950af",
     "name": "CPG Example",
-    "description": "Run `$apply` for each CQL test case against a local FHIR server.\nLoad the conformance resources first with `bin/load-fhir-server.sh`; do not load the test data, as each request passes its test case inline as the `data` parameter (the same way cpg-review does).\n\nRequest bodies are generated from `input/examples/Bundle-<TestCase>.json` by `bin/build-test-bundles.sh`; re-run it after changing test data. `Needs…` cases should propose an order; the others should not.",
+    "description": "Run `$apply` for each CQL test case against a local FHIR server.\nLoad the conformance resources first with `node bin/load-fhir-server.js`; do not load the test data, as each request passes its test case inline as the `data` parameter (the same way cpg-review does).\n\nRequest bodies are generated from `input/examples/Bundle-<TestCase>.json` by `node bin/build-test-bundles.js`; re-run it after changing test data. `Needs…` cases should propose an order; the others should not.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
