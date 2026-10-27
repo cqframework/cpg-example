@@ -15,7 +15,7 @@
                 {
                     "kind": "applicability",
                     "expression": {
-                        "lanugage": "text/cql-identifier",
+                        "language": "text/cql-identifier",
                         "expression": "No Daily Apple Order" 
                     }
                 }
