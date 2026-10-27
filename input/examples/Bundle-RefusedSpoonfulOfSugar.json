@@ -1,0 +1,162 @@
+{
+  "resourceType": "Bundle",
+  "id": "RefusedSpoonfulOfSugar",
+  "type": "collection",
+  "entry": [
+    {
+      "fullUrl": "http://fhir.org/guides/cqf/cpg/example/Patient/RefusedSpoonfulOfSugar",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "RefusedSpoonfulOfSugar",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "text": "SpoonfulOfSugar, Refused",
+            "family": "SpoonfulOfSugar",
+            "given": [
+              "Refused"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1994-05-12",
+        "deceasedBoolean": false
+      }
+    },
+    {
+      "fullUrl": "http://fhir.org/guides/cqf/cpg/example/MedicationRequest/DailyAppleOrder",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "DailyAppleOrder",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-medicationrequest"
+          ]
+        },
+        "status": "active",
+        "intent": "order",
+        "priority": "routine",
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "735215001",
+              "display": "Apple (substance)"
+            }
+          ],
+          "text": "Apple"
+        },
+        "subject": {
+          "reference": "Patient/RefusedSpoonfulOfSugar"
+        },
+        "basedOn": [
+          {
+            "reference": "MedicationRequest/Has-DailyAppleProposal"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 1,
+                "periodUnit": "d"
+              }
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "apple",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{apple}"
+                },
+                "rateQuantity": {
+                  "value": 1
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "http://fhir.org/guides/cqf/cpg/example/ServiceRequest/Refused-SpoonfulOfSugarOrder",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "Refused-SpoonfulOfSugarOrder",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-servicerequest"
+          ]
+        },
+        "basedOn": [
+          {
+            "reference": "ServiceRequest/Refused-SpoonfulOfSugarProposal"
+          }
+        ],
+        "status": "active",
+        "statusReason": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "182895007",
+              "display": "Drug declined by patient (situation)"
+            }
+          ]
+        },
+        "intent": "order",
+        "priority": "routine",
+        "code": {
+          "coding": [
+            {
+              "system": "http://fhir.org/guides/cqf/cpg/example/CodeSystem/ExampleCodes",
+              "code": "sugar",
+              "display": "Sugar"
+            }
+          ],
+          "text": "Sugar"
+        },
+        "subject": {
+          "reference": "Patient/RefusedSpoonfulOfSugar"
+        },
+        "doNotPerform": true,
+        "instantiatesCanonical": [
+          "http://fhir.org/guides/cqf/cpg/example/ActivityDefinition/SpoonfulOfSugarActivity"
+        ]
+      }
+    },
+    {
+      "fullUrl": "http://fhir.org/guides/cqf/cpg/example/ServiceRequest/Refused-SpoonfulOfSugarProposal",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "Refused-SpoonfulOfSugarProposal",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-servicerequest"
+          ]
+        },
+        "status": "active",
+        "intent": "proposal",
+        "priority": "routine",
+        "code": {
+          "coding": [
+            {
+              "system": "http://fhir.org/guides/cqf/cpg/example/CodeSystem/ExampleCodes",
+              "code": "sugar",
+              "display": "Sugar"
+            }
+          ],
+          "text": "Sugar"
+        },
+        "subject": {
+          "reference": "Patient/RefusedSpoonfulOfSugar"
+        },
+        "instantiatesCanonical": [
+          "http://fhir.org/guides/cqf/cpg/example/ActivityDefinition/SpoonfulOfSugarActivity"
+        ]
+      }
+    }
+  ]
+}

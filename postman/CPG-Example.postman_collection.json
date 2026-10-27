@@ -1,0 +1,399 @@
+{
+  "info": {
+    "_postman_id": "00cf7b76-e4f9-43c6-95e2-132962c950af",
+    "name": "CPG Example",
+    "description": "Run `$apply` for each CQL test case against a local FHIR server.\nLoad the conformance resources first with `bin/load-fhir-server.sh`; do not load the test data, as each request passes its test case inline as the `data` parameter (the same way cpg-review does).\n\nRequest bodies are generated from `input/examples/Bundle-<TestCase>.json` by `bin/build-test-bundles.sh`; re-run it after changing test data. `Needs…` cases should propose an order; the others should not.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "DailyAppleRecommendation",
+      "description": "Test cases from `input/tests/Library/DailyAppleLogic`.",
+      "item": [
+        {
+          "name": "HasDailyAppleOrder",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "",
+                  "const carePlan = pm.response.json();",
+                  "pm.test(\"Returns a CarePlan\", () => pm.expect(carePlan.resourceType).to.eql(\"CarePlan\"));",
+                  "",
+                  "const proposed = (carePlan.contained || []).map(r => r.resourceType);",
+                  "pm.test(\"Proposes no MedicationRequest\", () => pm.expect(proposed).to.not.include(\"MedicationRequest\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/fhir+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/PlanDefinition/DailyAppleRecommendation/$apply",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "PlanDefinition",
+                "DailyAppleRecommendation",
+                "$apply"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [\n    {\n      \"name\": \"subject\",\n      \"valueString\": \"Patient/HasDailyAppleOrder\"\n    },\n    {\n      \"name\": \"data\",\n      \"resource\": {\n        \"resourceType\": \"Bundle\",\n        \"id\": \"HasDailyAppleOrder\",\n        \"type\": \"collection\",\n        \"entry\": [\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/Patient/HasDailyAppleOrder\",\n            \"resource\": {\n              \"resourceType\": \"Patient\",\n              \"id\": \"HasDailyAppleOrder\",\n              \"active\": true,\n              \"name\": [\n                {\n                  \"use\": \"official\",\n                  \"text\": \"DailyApple, Has\",\n                  \"family\": \"DailyApple\",\n                  \"given\": [\n                    \"Has\"\n                  ]\n                }\n              ],\n              \"gender\": \"male\",\n              \"birthDate\": \"1994-05-12\",\n              \"deceasedBoolean\": false\n            }\n          },\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/MedicationRequest/Has-DailyAppleOrder\",\n            \"resource\": {\n              \"resourceType\": \"MedicationRequest\",\n              \"id\": \"Has-DailyAppleOrder\",\n              \"meta\": {\n                \"profile\": [\n                  \"http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-medicationrequest\"\n                ]\n              },\n              \"status\": \"active\",\n              \"intent\": \"order\",\n              \"priority\": \"routine\",\n              \"medicationCodeableConcept\": {\n                \"coding\": [\n                  {\n                    \"system\": \"http://snomed.info/sct\",\n                    \"code\": \"735215001\",\n                    \"display\": \"Apple (substance)\"\n                  }\n                ],\n                \"text\": \"Apple\"\n              },\n              \"subject\": {\n                \"reference\": \"Patient/HasDailyAppleOrder\"\n              },\n              \"basedOn\": [\n                {\n                  \"reference\": \"MedicationRequest/Has-DailyAppleProposal\"\n                }\n              ],\n              \"dosageInstruction\": [\n                {\n                  \"timing\": {\n                    \"repeat\": {\n                      \"frequency\": 1,\n                      \"period\": 1,\n                      \"periodUnit\": \"d\"\n                    }\n                  },\n                  \"doseAndRate\": [\n                    {\n                      \"doseQuantity\": {\n                        \"value\": 1,\n                        \"unit\": \"apple\",\n                        \"system\": \"http://unitsofmeasure.org\",\n                        \"code\": \"{apple}\"\n                      },\n                      \"rateQuantity\": {\n                        \"value\": 1\n                      }\n                    }\n                  ]\n                }\n              ]\n            }\n          },\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/MedicationRequest/Has-DailyAppleProposal\",\n            \"resource\": {\n              \"resourceType\": \"MedicationRequest\",\n              \"id\": \"Has-DailyAppleProposal\",\n              \"meta\": {\n                \"profile\": [\n                  \"http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-medicationrequest\"\n                ]\n              },\n              \"status\": \"active\",\n              \"intent\": \"proposal\",\n              \"priority\": \"routine\",\n              \"medicationCodeableConcept\": {\n                \"coding\": [\n                  {\n                    \"system\": \"http://snomed.info/sct\",\n                    \"code\": \"735215001\",\n                    \"display\": \"Apple (substance)\"\n                  }\n                ],\n                \"text\": \"Apple\"\n              },\n              \"subject\": {\n                \"reference\": \"Patient/HasDailyAppleOrder\"\n              },\n              \"instantiatesCanonical\": [\n                \"http://fhir.org/guides/cqf/cpg/example/ActivityDefinition/DailyAppleActivity\"\n              ],\n              \"dosageInstruction\": [\n                {\n                  \"timing\": {\n                    \"repeat\": {\n                      \"frequency\": 1,\n                      \"period\": 1,\n                      \"periodUnit\": \"d\"\n                    }\n                  },\n                  \"doseAndRate\": [\n                    {\n                      \"doseQuantity\": {\n                        \"value\": 1,\n                        \"unit\": \"apple\",\n                        \"system\": \"http://unitsofmeasure.org\",\n                        \"code\": \"{apple}\"\n                      },\n                      \"rateQuantity\": {\n                        \"value\": 1\n                      }\n                    }\n                  ]\n                }\n              ]\n            }\n          }\n        ]\n      }\n    }\n  ]\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "NeedsDailyAppleOrder",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "",
+                  "const carePlan = pm.response.json();",
+                  "pm.test(\"Returns a CarePlan\", () => pm.expect(carePlan.resourceType).to.eql(\"CarePlan\"));",
+                  "",
+                  "const proposed = (carePlan.contained || []).map(r => r.resourceType);",
+                  "pm.test(\"Proposes a MedicationRequest\", () => pm.expect(proposed).to.include(\"MedicationRequest\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/fhir+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/PlanDefinition/DailyAppleRecommendation/$apply",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "PlanDefinition",
+                "DailyAppleRecommendation",
+                "$apply"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [\n    {\n      \"name\": \"subject\",\n      \"valueString\": \"Patient/NeedsDailyAppleOrder\"\n    },\n    {\n      \"name\": \"data\",\n      \"resource\": {\n        \"resourceType\": \"Bundle\",\n        \"id\": \"NeedsDailyAppleOrder\",\n        \"type\": \"collection\",\n        \"entry\": [\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/Patient/NeedsDailyAppleOrder\",\n            \"resource\": {\n              \"resourceType\": \"Patient\",\n              \"id\": \"NeedsDailyAppleOrder\",\n              \"active\": true,\n              \"name\": [\n                {\n                  \"use\": \"official\",\n                  \"text\": \"DailyApple, Needs\",\n                  \"family\": \"DailyApple\",\n                  \"given\": [\n                    \"Needs\"\n                  ]\n                }\n              ],\n              \"gender\": \"male\",\n              \"birthDate\": \"1994-05-12\",\n              \"deceasedBoolean\": false\n            }\n          }\n        ]\n      }\n    }\n  ]\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "RefusedDailyAppleOrder",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "",
+                  "const carePlan = pm.response.json();",
+                  "pm.test(\"Returns a CarePlan\", () => pm.expect(carePlan.resourceType).to.eql(\"CarePlan\"));",
+                  "",
+                  "const proposed = (carePlan.contained || []).map(r => r.resourceType);",
+                  "pm.test(\"Proposes no MedicationRequest\", () => pm.expect(proposed).to.not.include(\"MedicationRequest\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/fhir+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/PlanDefinition/DailyAppleRecommendation/$apply",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "PlanDefinition",
+                "DailyAppleRecommendation",
+                "$apply"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [\n    {\n      \"name\": \"subject\",\n      \"valueString\": \"Patient/RefusedDailyAppleOrder\"\n    },\n    {\n      \"name\": \"data\",\n      \"resource\": {\n        \"resourceType\": \"Bundle\",\n        \"id\": \"RefusedDailyAppleOrder\",\n        \"type\": \"collection\",\n        \"entry\": [\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/Patient/RefusedDailyAppleOrder\",\n            \"resource\": {\n              \"resourceType\": \"Patient\",\n              \"id\": \"RefusedDailyAppleOrder\",\n              \"active\": true,\n              \"name\": [\n                {\n                  \"use\": \"official\",\n                  \"text\": \"DailyApple, Refused\",\n                  \"family\": \"DailyApple\",\n                  \"given\": [\n                    \"Refused\"\n                  ]\n                }\n              ],\n              \"gender\": \"male\",\n              \"birthDate\": \"1994-05-12\",\n              \"deceasedBoolean\": false\n            }\n          },\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/MedicationRequest/Refused-DailyAppleProposal\",\n            \"resource\": {\n              \"resourceType\": \"MedicationRequest\",\n              \"id\": \"Refused-DailyAppleProposal\",\n              \"meta\": {\n                \"profile\": [\n                  \"http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-medicationrequest\"\n                ]\n              },\n              \"status\": \"active\",\n              \"intent\": \"proposal\",\n              \"priority\": \"routine\",\n              \"medicationCodeableConcept\": {\n                \"coding\": [\n                  {\n                    \"system\": \"http://snomed.info/sct\",\n                    \"code\": \"735215001\",\n                    \"display\": \"Apple (substance)\"\n                  }\n                ],\n                \"text\": \"Apple\"\n              },\n              \"subject\": {\n                \"reference\": \"Patient/RefusedDailyAppleOrder\"\n              },\n              \"instantiatesCanonical\": [\n                \"http://fhir.org/guides/cqf/cpg/example/ActivityDefinition/DailyAppleActivity\"\n              ],\n              \"dosageInstruction\": [\n                {\n                  \"timing\": {\n                    \"repeat\": {\n                      \"frequency\": 1,\n                      \"period\": 1,\n                      \"periodUnit\": \"d\"\n                    }\n                  },\n                  \"doseAndRate\": [\n                    {\n                      \"doseQuantity\": {\n                        \"value\": 1,\n                        \"unit\": \"apple\",\n                        \"system\": \"http://unitsofmeasure.org\",\n                        \"code\": \"{apple}\"\n                      },\n                      \"rateQuantity\": {\n                        \"value\": 1\n                      }\n                    }\n                  ]\n                }\n              ]\n            }\n          },\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/MedicationRequest/Refused-RefusedDailyAppleOrder\",\n            \"resource\": {\n              \"resourceType\": \"MedicationRequest\",\n              \"id\": \"Refused-RefusedDailyAppleOrder\",\n              \"meta\": {\n                \"profile\": [\n                  \"http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-medicationrequest\"\n                ]\n              },\n              \"status\": \"active\",\n              \"statusReason\": {\n                \"coding\": [\n                  {\n                    \"system\": \"http://snomed.info/sct\",\n                    \"code\": \"182895007\",\n                    \"display\": \"Drug declined by patient (situation)\"\n                  }\n                ]\n              },\n              \"intent\": \"order\",\n              \"priority\": \"routine\",\n              \"doNotPerform\": true,\n              \"medicationCodeableConcept\": {\n                \"coding\": [\n                  {\n                    \"system\": \"http://snomed.info/sct\",\n                    \"code\": \"735215001\",\n                    \"display\": \"Apple (substance)\"\n                  }\n                ],\n                \"text\": \"Apple\"\n              },\n              \"subject\": {\n                \"reference\": \"Patient/RefusedDailyAppleOrder\"\n              },\n              \"basedOn\": [\n                {\n                  \"reference\": \"MedicationRequest/Refused-DailyAppleProposal\"\n                }\n              ],\n              \"dosageInstruction\": [\n                {\n                  \"timing\": {\n                    \"repeat\": {\n                      \"frequency\": 1,\n                      \"period\": 1,\n                      \"periodUnit\": \"d\"\n                    }\n                  },\n                  \"doseAndRate\": [\n                    {\n                      \"doseQuantity\": {\n                        \"value\": 1,\n                        \"unit\": \"apple\",\n                        \"system\": \"http://unitsofmeasure.org\",\n                        \"code\": \"{apple}\"\n                      },\n                      \"rateQuantity\": {\n                        \"value\": 1\n                      }\n                    }\n                  ]\n                }\n              ]\n            }\n          }\n        ]\n      }\n    }\n  ]\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "SpoonfulOfSugarRecommendation",
+      "description": "Test cases from `input/tests/Library/SpoonfulOfSugarLogic`.",
+      "item": [
+        {
+          "name": "DoesNotNeedSpoonfulOfSugar",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "",
+                  "const carePlan = pm.response.json();",
+                  "pm.test(\"Returns a CarePlan\", () => pm.expect(carePlan.resourceType).to.eql(\"CarePlan\"));",
+                  "",
+                  "const proposed = (carePlan.contained || []).map(r => r.resourceType);",
+                  "pm.test(\"Proposes no ServiceRequest\", () => pm.expect(proposed).to.not.include(\"ServiceRequest\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/fhir+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/PlanDefinition/SpoonfulOfSugarRecommendation/$apply",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "PlanDefinition",
+                "SpoonfulOfSugarRecommendation",
+                "$apply"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [\n    {\n      \"name\": \"subject\",\n      \"valueString\": \"Patient/DoesNotNeedSpoonfulOfSugar\"\n    },\n    {\n      \"name\": \"data\",\n      \"resource\": {\n        \"resourceType\": \"Bundle\",\n        \"id\": \"DoesNotNeedSpoonfulOfSugar\",\n        \"type\": \"collection\",\n        \"entry\": [\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/Patient/DoesNotNeedSpoonfulOfSugar\",\n            \"resource\": {\n              \"resourceType\": \"Patient\",\n              \"id\": \"DoesNotNeedSpoonfulOfSugar\",\n              \"active\": true,\n              \"name\": [\n                {\n                  \"use\": \"official\",\n                  \"text\": \"SpoonfulOfSugar, DoesNotNeed\",\n                  \"family\": \"SpoonfulOfSugar\",\n                  \"given\": [\n                    \"DoesNotNeed\"\n                  ]\n                }\n              ],\n              \"gender\": \"male\",\n              \"birthDate\": \"1994-05-12\",\n              \"deceasedBoolean\": false\n            }\n          }\n        ]\n      }\n    }\n  ]\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "HasSpoonfulOfSugar",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "",
+                  "const carePlan = pm.response.json();",
+                  "pm.test(\"Returns a CarePlan\", () => pm.expect(carePlan.resourceType).to.eql(\"CarePlan\"));",
+                  "",
+                  "const proposed = (carePlan.contained || []).map(r => r.resourceType);",
+                  "pm.test(\"Proposes no ServiceRequest\", () => pm.expect(proposed).to.not.include(\"ServiceRequest\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/fhir+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/PlanDefinition/SpoonfulOfSugarRecommendation/$apply",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "PlanDefinition",
+                "SpoonfulOfSugarRecommendation",
+                "$apply"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [\n    {\n      \"name\": \"subject\",\n      \"valueString\": \"Patient/HasSpoonfulOfSugar\"\n    },\n    {\n      \"name\": \"data\",\n      \"resource\": {\n        \"resourceType\": \"Bundle\",\n        \"id\": \"HasSpoonfulOfSugar\",\n        \"type\": \"collection\",\n        \"entry\": [\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/Patient/HasSpoonfulOfSugar\",\n            \"resource\": {\n              \"resourceType\": \"Patient\",\n              \"id\": \"HasSpoonfulOfSugar\",\n              \"active\": true,\n              \"name\": [\n                {\n                  \"use\": \"official\",\n                  \"text\": \"SpoonfulOfSugar, Has\",\n                  \"family\": \"SpoonfulOfSugar\",\n                  \"given\": [\n                    \"Has\"\n                  ]\n                }\n              ],\n              \"gender\": \"male\",\n              \"birthDate\": \"1994-05-12\",\n              \"deceasedBoolean\": false\n            }\n          },\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/MedicationRequest/DailyAppleOrder\",\n            \"resource\": {\n              \"resourceType\": \"MedicationRequest\",\n              \"id\": \"DailyAppleOrder\",\n              \"meta\": {\n                \"profile\": [\n                  \"http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-medicationrequest\"\n                ]\n              },\n              \"status\": \"active\",\n              \"intent\": \"order\",\n              \"priority\": \"routine\",\n              \"medicationCodeableConcept\": {\n                \"coding\": [\n                  {\n                    \"system\": \"http://snomed.info/sct\",\n                    \"code\": \"735215001\",\n                    \"display\": \"Apple (substance)\"\n                  }\n                ],\n                \"text\": \"Apple\"\n              },\n              \"subject\": {\n                \"reference\": \"Patient/HasSpoonfulOfSugar\"\n              },\n              \"basedOn\": [\n                {\n                  \"reference\": \"MedicationRequest/Has-DailyAppleProposal\"\n                }\n              ],\n              \"dosageInstruction\": [\n                {\n                  \"timing\": {\n                    \"repeat\": {\n                      \"frequency\": 1,\n                      \"period\": 1,\n                      \"periodUnit\": \"d\"\n                    }\n                  },\n                  \"doseAndRate\": [\n                    {\n                      \"doseQuantity\": {\n                        \"value\": 1,\n                        \"unit\": \"apple\",\n                        \"system\": \"http://unitsofmeasure.org\",\n                        \"code\": \"{apple}\"\n                      },\n                      \"rateQuantity\": {\n                        \"value\": 1\n                      }\n                    }\n                  ]\n                }\n              ]\n            }\n          },\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/ServiceRequest/Has-SpoonfulOfSugarOrder\",\n            \"resource\": {\n              \"resourceType\": \"ServiceRequest\",\n              \"id\": \"Has-SpoonfulOfSugarOrder\",\n              \"meta\": {\n                \"profile\": [\n                  \"http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-servicerequest\"\n                ]\n              },\n              \"basedOn\": [\n                {\n                  \"reference\": \"ServiceRequest/Has-SpoonfulOfSugarProposal\"\n                }\n              ],\n              \"status\": \"active\",\n              \"intent\": \"order\",\n              \"priority\": \"routine\",\n              \"code\": {\n                \"coding\": [\n                  {\n                    \"system\": \"http://fhir.org/guides/cqf/cpg/example/CodeSystem/ExampleCodes\",\n                    \"code\": \"sugar\",\n                    \"display\": \"Sugar\"\n                  }\n                ],\n                \"text\": \"Sugar\"\n              },\n              \"subject\": {\n                \"reference\": \"Patient/HasSpoonfulOfSugar\"\n              },\n              \"instantiatesCanonical\": [\n                \"http://fhir.org/guides/cqf/cpg/example/ActivityDefinition/SpoonfulOfSugarActivity\"\n              ]\n            }\n          },\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/ServiceRequest/Has-SpoonfulOfSugarProposal\",\n            \"resource\": {\n              \"resourceType\": \"ServiceRequest\",\n              \"id\": \"Has-SpoonfulOfSugarProposal\",\n              \"meta\": {\n                \"profile\": [\n                  \"http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-servicerequest\"\n                ]\n              },\n              \"status\": \"active\",\n              \"intent\": \"proposal\",\n              \"priority\": \"routine\",\n              \"code\": {\n                \"coding\": [\n                  {\n                    \"system\": \"http://fhir.org/guides/cqf/cpg/example/CodeSystem/ExampleCodes\",\n                    \"code\": \"sugar\",\n                    \"display\": \"Sugar\"\n                  }\n                ],\n                \"text\": \"Sugar\"\n              },\n              \"subject\": {\n                \"reference\": \"Patient/HasSpoonfulOfSugar\"\n              },\n              \"instantiatesCanonical\": [\n                \"http://fhir.org/guides/cqf/cpg/example/ActivityDefinition/SpoonfulOfSugarActivity\"\n              ]\n            }\n          }\n        ]\n      }\n    }\n  ]\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "NeedsSpoonfulOfSugar",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "",
+                  "const carePlan = pm.response.json();",
+                  "pm.test(\"Returns a CarePlan\", () => pm.expect(carePlan.resourceType).to.eql(\"CarePlan\"));",
+                  "",
+                  "const proposed = (carePlan.contained || []).map(r => r.resourceType);",
+                  "pm.test(\"Proposes a ServiceRequest\", () => pm.expect(proposed).to.include(\"ServiceRequest\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/fhir+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/PlanDefinition/SpoonfulOfSugarRecommendation/$apply",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "PlanDefinition",
+                "SpoonfulOfSugarRecommendation",
+                "$apply"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [\n    {\n      \"name\": \"subject\",\n      \"valueString\": \"Patient/NeedsSpoonfulOfSugar\"\n    },\n    {\n      \"name\": \"data\",\n      \"resource\": {\n        \"resourceType\": \"Bundle\",\n        \"id\": \"NeedsSpoonfulOfSugar\",\n        \"type\": \"collection\",\n        \"entry\": [\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/Patient/NeedsSpoonfulOfSugar\",\n            \"resource\": {\n              \"resourceType\": \"Patient\",\n              \"id\": \"NeedsSpoonfulOfSugar\",\n              \"active\": true,\n              \"name\": [\n                {\n                  \"use\": \"official\",\n                  \"text\": \"SpoonfulOfSugar, Needs\",\n                  \"family\": \"SpoonfulOfSugar\",\n                  \"given\": [\n                    \"Needs\"\n                  ]\n                }\n              ],\n              \"gender\": \"male\",\n              \"birthDate\": \"1994-05-12\",\n              \"deceasedBoolean\": false\n            }\n          },\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/MedicationRequest/DailyAppleOrder\",\n            \"resource\": {\n              \"resourceType\": \"MedicationRequest\",\n              \"id\": \"DailyAppleOrder\",\n              \"meta\": {\n                \"profile\": [\n                  \"http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-medicationrequest\"\n                ]\n              },\n              \"status\": \"active\",\n              \"intent\": \"order\",\n              \"priority\": \"routine\",\n              \"medicationCodeableConcept\": {\n                \"coding\": [\n                  {\n                    \"system\": \"http://snomed.info/sct\",\n                    \"code\": \"735215001\",\n                    \"display\": \"Apple (substance)\"\n                  }\n                ],\n                \"text\": \"Apple\"\n              },\n              \"subject\": {\n                \"reference\": \"Patient/NeedsSpoonfulOfSugar\"\n              },\n              \"basedOn\": [\n                {\n                  \"reference\": \"MedicationRequest/Has-DailyAppleProposal\"\n                }\n              ],\n              \"dosageInstruction\": [\n                {\n                  \"timing\": {\n                    \"repeat\": {\n                      \"frequency\": 1,\n                      \"period\": 1,\n                      \"periodUnit\": \"d\"\n                    }\n                  },\n                  \"doseAndRate\": [\n                    {\n                      \"doseQuantity\": {\n                        \"value\": 1,\n                        \"unit\": \"apple\",\n                        \"system\": \"http://unitsofmeasure.org\",\n                        \"code\": \"{apple}\"\n                      },\n                      \"rateQuantity\": {\n                        \"value\": 1\n                      }\n                    }\n                  ]\n                }\n              ]\n            }\n          }\n        ]\n      }\n    }\n  ]\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "RefusedSpoonfulOfSugar",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "",
+                  "const carePlan = pm.response.json();",
+                  "pm.test(\"Returns a CarePlan\", () => pm.expect(carePlan.resourceType).to.eql(\"CarePlan\"));",
+                  "",
+                  "const proposed = (carePlan.contained || []).map(r => r.resourceType);",
+                  "pm.test(\"Proposes no ServiceRequest\", () => pm.expect(proposed).to.not.include(\"ServiceRequest\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/fhir+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/PlanDefinition/SpoonfulOfSugarRecommendation/$apply",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "PlanDefinition",
+                "SpoonfulOfSugarRecommendation",
+                "$apply"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [\n    {\n      \"name\": \"subject\",\n      \"valueString\": \"Patient/RefusedSpoonfulOfSugar\"\n    },\n    {\n      \"name\": \"data\",\n      \"resource\": {\n        \"resourceType\": \"Bundle\",\n        \"id\": \"RefusedSpoonfulOfSugar\",\n        \"type\": \"collection\",\n        \"entry\": [\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/Patient/RefusedSpoonfulOfSugar\",\n            \"resource\": {\n              \"resourceType\": \"Patient\",\n              \"id\": \"RefusedSpoonfulOfSugar\",\n              \"active\": true,\n              \"name\": [\n                {\n                  \"use\": \"official\",\n                  \"text\": \"SpoonfulOfSugar, Refused\",\n                  \"family\": \"SpoonfulOfSugar\",\n                  \"given\": [\n                    \"Refused\"\n                  ]\n                }\n              ],\n              \"gender\": \"male\",\n              \"birthDate\": \"1994-05-12\",\n              \"deceasedBoolean\": false\n            }\n          },\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/MedicationRequest/DailyAppleOrder\",\n            \"resource\": {\n              \"resourceType\": \"MedicationRequest\",\n              \"id\": \"DailyAppleOrder\",\n              \"meta\": {\n                \"profile\": [\n                  \"http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-medicationrequest\"\n                ]\n              },\n              \"status\": \"active\",\n              \"intent\": \"order\",\n              \"priority\": \"routine\",\n              \"medicationCodeableConcept\": {\n                \"coding\": [\n                  {\n                    \"system\": \"http://snomed.info/sct\",\n                    \"code\": \"735215001\",\n                    \"display\": \"Apple (substance)\"\n                  }\n                ],\n                \"text\": \"Apple\"\n              },\n              \"subject\": {\n                \"reference\": \"Patient/RefusedSpoonfulOfSugar\"\n              },\n              \"basedOn\": [\n                {\n                  \"reference\": \"MedicationRequest/Has-DailyAppleProposal\"\n                }\n              ],\n              \"dosageInstruction\": [\n                {\n                  \"timing\": {\n                    \"repeat\": {\n                      \"frequency\": 1,\n                      \"period\": 1,\n                      \"periodUnit\": \"d\"\n                    }\n                  },\n                  \"doseAndRate\": [\n                    {\n                      \"doseQuantity\": {\n                        \"value\": 1,\n                        \"unit\": \"apple\",\n                        \"system\": \"http://unitsofmeasure.org\",\n                        \"code\": \"{apple}\"\n                      },\n                      \"rateQuantity\": {\n                        \"value\": 1\n                      }\n                    }\n                  ]\n                }\n              ]\n            }\n          },\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/ServiceRequest/Refused-SpoonfulOfSugarOrder\",\n            \"resource\": {\n              \"resourceType\": \"ServiceRequest\",\n              \"id\": \"Refused-SpoonfulOfSugarOrder\",\n              \"meta\": {\n                \"profile\": [\n                  \"http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-servicerequest\"\n                ]\n              },\n              \"basedOn\": [\n                {\n                  \"reference\": \"ServiceRequest/Refused-SpoonfulOfSugarProposal\"\n                }\n              ],\n              \"status\": \"active\",\n              \"statusReason\": {\n                \"coding\": [\n                  {\n                    \"system\": \"http://snomed.info/sct\",\n                    \"code\": \"182895007\",\n                    \"display\": \"Drug declined by patient (situation)\"\n                  }\n                ]\n              },\n              \"intent\": \"order\",\n              \"priority\": \"routine\",\n              \"code\": {\n                \"coding\": [\n                  {\n                    \"system\": \"http://fhir.org/guides/cqf/cpg/example/CodeSystem/ExampleCodes\",\n                    \"code\": \"sugar\",\n                    \"display\": \"Sugar\"\n                  }\n                ],\n                \"text\": \"Sugar\"\n              },\n              \"subject\": {\n                \"reference\": \"Patient/RefusedSpoonfulOfSugar\"\n              },\n              \"doNotPerform\": true,\n              \"instantiatesCanonical\": [\n                \"http://fhir.org/guides/cqf/cpg/example/ActivityDefinition/SpoonfulOfSugarActivity\"\n              ]\n            }\n          },\n          {\n            \"fullUrl\": \"http://fhir.org/guides/cqf/cpg/example/ServiceRequest/Refused-SpoonfulOfSugarProposal\",\n            \"resource\": {\n              \"resourceType\": \"ServiceRequest\",\n              \"id\": \"Refused-SpoonfulOfSugarProposal\",\n              \"meta\": {\n                \"profile\": [\n                  \"http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-servicerequest\"\n                ]\n              },\n              \"status\": \"active\",\n              \"intent\": \"proposal\",\n              \"priority\": \"routine\",\n              \"code\": {\n                \"coding\": [\n                  {\n                    \"system\": \"http://fhir.org/guides/cqf/cpg/example/CodeSystem/ExampleCodes\",\n                    \"code\": \"sugar\",\n                    \"display\": \"Sugar\"\n                  }\n                ],\n                \"text\": \"Sugar\"\n              },\n              \"subject\": {\n                \"reference\": \"Patient/RefusedSpoonfulOfSugar\"\n              },\n              \"instantiatesCanonical\": [\n                \"http://fhir.org/guides/cqf/cpg/example/ActivityDefinition/SpoonfulOfSugarActivity\"\n              ]\n            }\n          }\n        ]\n      }\n    }\n  ]\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/fhir"
+    }
+  ]
+}

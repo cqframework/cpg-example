@@ -1,0 +1,85 @@
+{
+  "resourceType": "Bundle",
+  "id": "NeedsSpoonfulOfSugar",
+  "type": "collection",
+  "entry": [
+    {
+      "fullUrl": "http://fhir.org/guides/cqf/cpg/example/Patient/NeedsSpoonfulOfSugar",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "NeedsSpoonfulOfSugar",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "text": "SpoonfulOfSugar, Needs",
+            "family": "SpoonfulOfSugar",
+            "given": [
+              "Needs"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1994-05-12",
+        "deceasedBoolean": false
+      }
+    },
+    {
+      "fullUrl": "http://fhir.org/guides/cqf/cpg/example/MedicationRequest/DailyAppleOrder",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "DailyAppleOrder",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-medicationrequest"
+          ]
+        },
+        "status": "active",
+        "intent": "order",
+        "priority": "routine",
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "735215001",
+              "display": "Apple (substance)"
+            }
+          ],
+          "text": "Apple"
+        },
+        "subject": {
+          "reference": "Patient/NeedsSpoonfulOfSugar"
+        },
+        "basedOn": [
+          {
+            "reference": "MedicationRequest/Has-DailyAppleProposal"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 1,
+                "periodUnit": "d"
+              }
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "apple",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{apple}"
+                },
+                "rateQuantity": {
+                  "value": 1
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
