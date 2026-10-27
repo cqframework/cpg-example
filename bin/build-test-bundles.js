@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Wraps each CQL test case (input/tests/Library/<Library>/<TestCase>/*.json)
 // in a collection Bundle at input/examples/Bundle-<TestCase>.json, so the test
-// patients end up in the IG package (e.g. selectable as patients in cpg-review).
+// patients end up in the IG package (e.g. selectable as patients in cpg-review),
+// and lists them (with a name and description) in input/cpg-example.xml.
 // Also points each Postman request (named after its test case) at POST $apply
 // with that test case's bundle as inline `data`, matching what cpg-review sends.
 //
@@ -17,6 +18,7 @@ const ROOT = path.resolve(__dirname, '..')
 const TESTS = path.join(ROOT, 'input', 'tests', 'Library')
 const EXAMPLES = path.join(ROOT, 'input', 'examples')
 const COLLECTION = path.join(ROOT, 'postman', 'CPG-Example.postman_collection.json')
+const IG = path.join(ROOT, 'input', 'cpg-example.xml')
 const BASE = 'http://fhir.org/guides/cqf/cpg/example'
 
 const readJson = (file) => JSON.parse(fs.readFileSync(file, 'utf8'))
@@ -30,8 +32,10 @@ const subdirs = (dir) =>
 
 const relative = (file) => path.relative(ROOT, file).split(path.sep).join('/')
 
+const testCases = []
 for (const lib of subdirs(TESTS)) {
   for (const tc of subdirs(path.join(TESTS, lib))) {
+    testCases.push({ lib, tc })
     const dir = path.join(TESTS, lib, tc)
     const resources = fs.readdirSync(dir)
       .filter((f) => f.endsWith('.json'))
@@ -53,6 +57,26 @@ for (const lib of subdirs(TESTS)) {
     console.log(`${relative(out)} (${resources.length} resources)`)
   }
 }
+
+// Bundles have no name or title, so list them in the ImplementationGuide with
+// one; otherwise the IG's table of contents and artifact index show "null".
+// "Needs…" test cases are the ones the recommendation should apply to.
+const igXml = fs.readFileSync(IG, 'utf8')
+const markers = /(<!-- BEGIN test case bundles[^>]*-->\n)[\s\S]*?(\s*<!-- END test case bundles -->)/
+if (!markers.test(igXml)) {
+  console.error(`No BEGIN/END test case bundles markers in ${relative(IG)}`)
+  process.exit(1)
+}
+const resourceEntries = testCases.map(({ lib, tc }) => [
+  '    <resource>',
+  `      <reference><reference value="Bundle/${tc}"/></reference>`,
+  `      <name value="${tc}"/>`,
+  `      <description value="Test case for ${lib}: the recommendation ${tc.startsWith('Needs') ? 'applies' : 'does not apply'}"/>`,
+  '      <exampleBoolean value="true"/>',
+  '    </resource>',
+].join('\n')).join('\n')
+fs.writeFileSync(IG, igXml.replace(markers, (_, begin, end) => `${begin}${resourceEntries}${end}`))
+console.log(`${relative(IG)} (${testCases.length} test case bundles listed)`)
 
 const collection = readJson(COLLECTION)
 for (const folder of collection.item) {

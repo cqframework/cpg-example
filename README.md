@@ -15,7 +15,7 @@ Each recommendation has CQL logic in `input/cql/` and test cases in `input/tests
 | SpoonfulOfSugarLogic | NeedsSpoonfulOfSugar | Spoonful of sugar proposed |
 | | DoesNotNeedSpoonfulOfSugar, HasSpoonfulOfSugar, RefusedSpoonfulOfSugar | Nothing proposed |
 
-**Whenever you change the resources in `input/tests`**, run `node bin/build-test-bundles.js` (requires [Node.js](https://nodejs.org/) 18 or later). It regenerates the example bundles (`input/examples/Bundle-<TestCase>.json`, which end up in the FHIR package) and the request bodies of the Postman collection. Commit the results.
+**Whenever you change the resources in `input/tests`**, run `node bin/build-test-bundles.js` (requires [Node.js](https://nodejs.org/) 18 or later). It regenerates the example bundles (`input/examples/Bundle-<TestCase>.json`, which end up in the FHIR package), their entries in `input/cpg-example.xml` (which give them a name and description in the IG), and the request bodies of the Postman collection. Commit the results.
 
 ## Test locally (CQL only)
 
