@@ -21,7 +21,9 @@ Each recommendation has CQL logic in `input/cql/` and test cases in `input/tests
 
 1. Check out this repository.
 2. Open it in VS Code and install the [CQL extension](https://marketplace.visualstudio.com/items?itemName=cqframework.cql).
-3. Right-click a CQL file in `input/cql/` and choose **Execute CQL**. The library is evaluated against each of its test cases (every folder under `input/tests/Library/<Library>/`), and the value of each `define` per test case is written to `input/tests/results/<Library>.txt`.
+3. Right-click a CQL file in `input/cql/` and choose **Execute CQL**. The library is evaluated against each of its test cases (every folder under `input/tests/Library/<Library>/`), and the value of each `define` per test case is written to `input/tests/results/<Library>.txt`. Use **Execute CQL - Select Test Cases** to run only some of them.
+
+   ![Right-click a CQL file in VS Code and choose Execute CQL](docs/images/execute-cql.png)
 
 ## Install Docker
 
@@ -46,7 +48,9 @@ The FHIR server and cpg-review below run in Docker.
 
    Leave it running in this terminal. Startup takes a minute or so; it's ready when [http://localhost:8080/fhir/metadata](http://localhost:8080/fhir/metadata) returns a CapabilityStatement. The server keeps its data only as long as the container exists, so after starting a new container, load the resources again (step 3). Stop it with Ctrl+C.
 
-2. Build the IG, so `output/` contains the Libraries with compiled CQL. On macOS/Linux run `./_updatePublisher.sh` once, then `./_genonce.sh`; on Windows run `_updatePublisher.bat` once, then `_genonce.bat`.
+2. Build the IG, so `output/` contains the Libraries with compiled CQL. On macOS/Linux run `./_updatePublisher.sh` once, then `./_genonce.sh`; on Windows run `_updatePublisher.bat` once, then `_genonce.bat`. Open `output/index.html` in a browser to see the IG, for example the Artifact Index:
+
+   ![The Artifact Index of the built IG](docs/images/ig-artifacts.png)
 3. Load the conformance resources (CodeSystem, ValueSets, Libraries, ActivityDefinitions, PlanDefinitions), using [Node.js](https://nodejs.org/) 18 or later:
 
    ```sh
@@ -56,6 +60,8 @@ The FHIR server and cpg-review below run in Docker.
    Do not load the test data: each request passes its test case inline, and a patient that is also stored on the server is seen twice, which makes the CQL fail.
 
 4. Import `postman/CPG-Example.postman_collection.json` into Postman and run the collection. Each request calls `PlanDefinition/$apply` for one test case and checks that it proposes (or doesn't propose) the expected activity. From the command line: `postman collection run postman/CPG-Example.postman_collection.json`.
+
+   ![The NeedsDailyAppleOrder request in Postman: the test case is sent as data, and the resulting CarePlan contains the proposed MedicationRequest](docs/images/postman-apply.png)
 
 ## Test with cpg-review
 
@@ -75,4 +81,6 @@ cpg-review, part of the [Reason Framework](https://github.com/reason-healthcare/
 
 3. Build the IG with `./_genonce.sh` (Windows: `_genonce.bat`).
 4. Upload `output/package.tgz`, pick a PlanDefinition, and under **Add Context** pick one of the test case bundles from the package as the patient. Then apply.
+
+   ![Daily Apple Recommendation applied in cpg-review for Patient/NeedsDailyAppleOrder: the condition holds and a MedicationRequest is proposed](docs/images/cpg-review-applied.png)
 
