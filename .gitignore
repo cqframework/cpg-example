@@ -3,12 +3,13 @@
 temp
 template
 output
+input-cache
+input/tests/results
 
 # Don't commit this because it's so large #
 ###########################################
 /input-cache/org.hl7.fhir.publisher.jar
 /input-cache/publisher.jar
-/input-cache/tooling*
 
 # Windows generated files #
 ###########################
@@ -22,3 +23,4 @@ Thumbs.db
 # backup files #
 ################
 *.bak
+Requirements-fromNarrative.json

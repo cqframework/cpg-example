@@ -1,0 +1,28 @@
+{
+  "resourceType": "Bundle",
+  "id": "DoesNotNeedSpoonfulOfSugar",
+  "type": "collection",
+  "entry": [
+    {
+      "fullUrl": "http://fhir.org/guides/cqf/cpg/example/Patient/DoesNotNeedSpoonfulOfSugar",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "DoesNotNeedSpoonfulOfSugar",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "text": "SpoonfulOfSugar, DoesNotNeed",
+            "family": "SpoonfulOfSugar",
+            "given": [
+              "DoesNotNeed"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1994-05-12",
+        "deceasedBoolean": false
+      }
+    }
+  ]
+}

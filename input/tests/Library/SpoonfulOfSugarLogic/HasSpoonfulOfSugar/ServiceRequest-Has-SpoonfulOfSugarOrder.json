@@ -6,9 +6,11 @@
             "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-servicerequest"
         ]
     },
-    "basedOn": {
-        "reference": "ServiceRequest/Has-SpoonfulOfSugarProposal"
-    },
+    "basedOn": [
+        {
+            "reference": "ServiceRequest/Has-SpoonfulOfSugarProposal"
+        }
+    ],
     "status": "active",
     "intent": "order",
     "priority": "routine",

@@ -1,235 +1,48 @@
-### Activity Examples
+The recommendations in this implementation guide are intentionally simplified to support demonstration applications. Each one has a PlanDefinition whose single action applies when its CQL condition is true, and then proposes the activity in its ActivityDefinition.
 
-The activity examples in this implementation guide provide simplified recommendations for each type of activity to support demonstration applications.
+Each test case is a Bundle with a Patient (with the same id as the Bundle) and the resources that make up the scenario. Test cases named `Needs…` should result in the activity being proposed; the others should not.
 
-#### Order Medication
+### Daily Apple
 
-A recommendation that a patient should receive an apple a day.
+*An apple a day keeps the doctor away.*
 
-This recommendation is intentionally simplified to support demonstration applications. In particular, the logic considers an `active` MedicationRequest for a medication in the `Apple` value set to be sufficient to meet the intent of the recommendation. In other words, the logic does not attempt to track medication dispensing or adherence. Demonstration applications can (and should) take the additional step of demonstrating the dispense of a medication.
+[DailyAppleRecommendation](PlanDefinition-DailyAppleRecommendation.html) proposes a daily apple ([DailyAppleActivity](ActivityDefinition-DailyAppleActivity.html), a MedicationRequest for a medication in the [Apple](ValueSet-Apple.html) value set) for an active patient who has neither an active order for a daily apple, nor an active order _not_ to give one.
 
-##### Test Scenarios
+The logic ([DailyAppleLogic](Library-DailyAppleLogic.html)) considers an `active` MedicationRequest to be sufficient to meet the intent of the recommendation. It does not attempt to track medication dispensing or adherence; demonstration applications can (and should) take the additional step of demonstrating the dispense of a medication.
 
-* NeedsDailyApple - A patient without an active order for a daily apple
-* HasDailyApple - A patient with an active order for a daily apple
-* RefusedDailyApple - A patient that refused a recommendation to take a daily apple
+Test cases:
 
-##### PlanDefinition
+{% for r in site.data.resources %}{% if r[0] contains "Bundle/" and r[0] contains "DailyApple" %}
+* [{{ r[0] | remove: "Bundle/" }}]({{ r[1].path }}) - {% if r[0] contains "Bundle/Needs" %}proposes a daily apple{% else %}proposes nothing{% endif %}{% endif %}{% endfor %}
 
-The [DailyAppleRecommendation](PlanDefinition-DailyAppleRecommendation.html) PlanDefinition applies if the patient is active and does not have an active order for a daily apple, or an active order _not_ to prescribe a daily apple.
+### Spoonful Of Sugar
 
-##### Request
+*A spoonful of sugar helps the medicine go down.*
 
-##### Response
+[SpoonfulOfSugarRecommendation](PlanDefinition-SpoonfulOfSugarRecommendation.html) proposes a spoonful of sugar ([SpoonfulOfSugarActivity](ActivityDefinition-SpoonfulOfSugarActivity.html), a ServiceRequest for a service in the [Sugar](ValueSet-Sugar.html) value set) for an active patient with at least one active medication order, unless the patient already has an active order for a spoonful of sugar, or an active order _not_ to give one.
 
-### Service Examples
+The logic is in [SpoonfulOfSugarLogic](Library-SpoonfulOfSugarLogic.html). In the test cases, the active medication is a daily apple order, as the daily apple recommendation would produce.
 
-The service examples in this implementation guide provide illustrations of the use of PlanDefinition to describe services where the logic is not expressed in a computable and shareable way, only the inputs and outputs of the service are described. For these examples, the PlanDefinition/$apply operation can still be used, but the implementation of the service is not shareable.
+Test cases:
 
-#### GetDiagnoses
+{% for r in site.data.resources %}{% if r[0] contains "Bundle/" and r[0] contains "SpoonfulOfSugar" %}
+* [{{ r[0] | remove: "Bundle/" }}]({{ r[1].path }}) - {% if r[0] contains "Bundle/Needs" %}proposes a spoonful of sugar{% else %}proposes nothing{% endif %}{% endif %}{% endfor %}
 
-A service that returns a set of possible indications, given patient data.
+### Running a test case
 
-##### Example Scenario
-
-**Input:** Male 50yo, BMI=35, shortness of breath, chest pain that worsens with deep breathin, impaired kidney function
-**Output:** Possible indications will be
-* Pulmonary Embolism
-* Acute Coronary Syndrome
-* Pneumothorax
-
-##### PlanDefinition
-
-[GetDiagnoses](PlanDefinition-GetDiagnoses.html)
-
-##### Request
-
-$apply:
-
-| Parameter | Value | Description |
-|----|----|----|
-|subject | Patient/X | A reference to a Patient resource created to provide the age and gender of the patient. This does not necessarily correspond to a Patient on the server or even an actual Patient, it is used to convey the information about the subject and provide a reference for the information provided to the service. |
-|data | Bundle | Data provided to the service for evaluation. This example uses the single-bundle approach, but prefetch information can be used to specify more granular breakdowns of the input data to the service. |
-|return | Bundle | Bundle containing a RequestGroup and the resulting propose-diagnosis tasks |
+Call `$apply` on the PlanDefinition with the test case as `data` and its Patient as `subject`:
 
 ```http
-POST [base]/PlanDefinition/GetDiagnoses/$apply
-```
+POST [base]/PlanDefinition/DailyAppleRecommendation/$apply
+Content-Type: application/fhir+json
 
-Body
-
-```json
 {
-    "resourceType": "Parameters",
-    "id": "input",
-    "parameter": [
-        {
-            "name": "subject",
-            "valueString": "Patient/X"
-        },
-        {
-            "name": "data",
-            "valueResource": {
-                "resourceType": "Bundle",
-                "id": "getdiagnoses-data",
-                ...
-            }
-        }
-    ]
+  "resourceType": "Parameters",
+  "parameter": [
+    { "name": "subject", "valueString": "Patient/NeedsDailyAppleOrder" },
+    { "name": "data", "resource": { "resourceType": "Bundle", "id": "NeedsDailyAppleOrder", ... } }
+  ]
 }
 ```
 
-[GetDiagnoses-Data](Bundle-getdiagnoses-data.html)
-
-##### Response
-
-```json
-{
-    "resourceType": "Parameters",
-    "id": "output",
-    "parameter": [
-        {
-            "name": "return",
-            "valueResource": {
-                "resourceType": "Bundle",
-                "id": "getdiagnoses-return",
-                ...
-            }
-        }
-    ]
-}
-```
-
-[GetDiagnoses-Return](Bundle-getdiagnoses-return.html)
-
-#### GetDataToCollect
-
-##### PlanDefinition
-
-[GetDataToCollect](PlanDefinition-GetDataToCollect.html)
-
-##### Request
-
-$apply:
-
-| Parameter | Value | Description |
-|----|----|----|
-|subject | Patient/X | A reference to a Patient resource created to provide the age and gender of the patient. This does not necessarily correspond to a Patient on the server or even an actual Patient, it is used to convey the information about the subject and provide a reference for the information provided to the service. |
-|data | Bundle | Data provided to the service for evaluation. This example uses the single-bundle approach, but prefetch information can be used to specify more granular breakdowns of the input data to the service. |
-|return | Bundle | Bundle containing a RequestGroup and the resulting collect-information task |
-
-```http
-POST [base]/PlanDefinition/GetDataToCollect/$apply
-```
-
-Body
-
-```json
-{
-    "resourceType": "Parameters",
-    "id": "input",
-    "parameter": [
-        {
-            "name": "subject",
-            "valueString": "Patient/Y"
-        },
-        {
-            "name": "data",
-            "valueResource": {
-                "resourceType": "Bundle",
-                "id": "getdatatocollect-data",
-                ...
-            }
-        }
-    ]
-}
-```
-
-[GetDataToCollect-Data](Bundle-getdatatocollect-data.html)
-
-##### Response
-
-```json
-{
-    "resourceType": "Parameters",
-    "id": "output",
-    "parameter": [
-        {
-            "name": "return",
-            "valueResource": {
-                "resourceType": "Bundle",
-                "id": "getdatatocollect-return",
-                ...
-            }
-        }
-    ]
-}
-```
-
-[GetDataToCollect-Return](Bundle-getdatatocollect-return.html)
-
-#### GetRecommendations
-
-##### PlanDefinition
-
-[GetRecommendations](PlanDefinition-GetRecommendations.html)
-
-##### Request
-
-$apply:
-
-| Parameter | Value | Description |
-|----|----|----|
-|subject | Patient/X | A reference to a Patient resource created to provide the age and gender of the patient. This does not necessarily correspond to a Patient on the server or even an actual Patient, it is used to convey the information about the subject and provide a reference for the information provided to the service. |
-|data | Bundle | Data provided to the service for evaluation. This example uses the single-bundle approach, but prefetch information can be used to specify more granular breakdowns of the input data to the service. |
-|return | Bundle | Bundle containing a RequestGroup and the resulting proposed medications and orders |
-
-```http
-POST [base]/PlanDefinition/GetRecommendations/$apply
-```
-
-Body
-
-```json
-{
-    "resourceType": "Parameters",
-    "id": "input",
-    "parameter": [
-        {
-            "name": "subject",
-            "valueString": "Patient/X"
-        },
-        {
-            "name": "data",
-            "valueResource": {
-                "resourceType": "Bundle",
-                "id": "getrecommendations-data",
-                ...
-            }
-        }
-    ]
-}
-```
-
-[GetRecommendations-Data](Bundle-getrecommendations-data.html)
-
-##### Response
-
-```json
-{
-    "resourceType": "Parameters",
-    "id": "output",
-    "parameter": [
-        {
-            "name": "return",
-            "valueResource": {
-                "resourceType": "Bundle",
-                "id": "getrecommendations-return",
-                ...
-            }
-        }
-    ]
-}
-```
-
-[GetRecommendations-Return](Bundle-getrecommendations-return.html)
+The response is a CarePlan. When the recommendation applies, it contains a RequestGroup with the action, and the proposed MedicationRequest or ServiceRequest.

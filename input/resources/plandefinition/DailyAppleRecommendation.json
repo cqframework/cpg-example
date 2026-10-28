@@ -10,12 +10,14 @@
     ],
     "action": [
         {
+            "id": "daily-apple",
+            "title": "Recommend a daily apple",
             "textEquivalent": "An apple a day keeps the doctor away",
             "condition": [
                 {
                     "kind": "applicability",
                     "expression": {
-                        "lanugage": "text/cql-identifier",
+                        "language": "text/cql-identifier",
                         "expression": "No Daily Apple Order" 
                     }
                 }
